@@ -1,9 +1,5 @@
 # healthcare-helper
-
-Hello jade!
 Website to help facilitate individuals' healthcare experience
 
-This file has changed now!
-
-HELLO RYAN
-I LOOOOOOOVE THIS THIS IS EPIIIIIIC!!!!!!
+day 1 - need to find data set
+https://github.com/Vignesh227/Stroke-prediction/blob/main/stroke%20prediction.csv
