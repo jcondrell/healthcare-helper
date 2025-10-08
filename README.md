@@ -4,4 +4,7 @@ By: Jade Condrell & Ryan Taylor
 Opened: October 1, 2025
 
 
+```{r}
+healthcare_dataset <- read_csv("healthcare_dataset.csv")
 
+```
