@@ -6,3 +6,4 @@ library(ggplot2)
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
 stroke_prediction <- read_csv("stroke prediction.csv")
 
+function(input, output) {}
