@@ -5,12 +5,6 @@ Opened: October 1, 2025
 
 
 
-library(tidyverse)
-
-
-
-healthcare_dataset <- read_csv("healthcare_dataset.csv")
-stroke_prediction <- read_csv("stroke prediction.csv")
 
 
 
