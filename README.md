@@ -6,7 +6,7 @@ Opened: October 1, 2025
 
 ```{r}
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
-stroke_pred <- read_csv("stroke prediction.csv")
+stroke_prediction <- read_csv("stroke prediction.csv")
 
 ```
 
