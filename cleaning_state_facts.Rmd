@@ -1,5 +1,17 @@
 ---
+Author: Ryan Taylor
 title: "cleaning_state_facts"
 output: html_document
 ---
 
+Library uploads
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+cleaned "state-facts.csv" by hand on 10.13.25
+
+```{r}
+state_facts <- read.csv("state_facts_handcleaned.csv")
+```
