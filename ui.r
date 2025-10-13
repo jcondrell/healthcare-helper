@@ -3,8 +3,8 @@ library(tidyverse)
 library(ggplot2)
 
 # healthcare_dataset <- read_csv("healthcare_dataset.csv")
-# stroke_prediction <- read_csv("stroke prediction.csv")
+# state_facts <- read_csv("state_facts.csv")
 
-data <- readRDS("datasets.RDS")
+data <- readRDS("new_datasets.RDS")
 healthcare_dataset <- data$healthcare_dataset
-stroke_prediction <- data$stroke_prediction
+state_facts <- data$state_facts
