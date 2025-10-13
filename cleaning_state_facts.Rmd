@@ -13,5 +13,5 @@ library(lubridate)
 cleaned "state-facts.csv" by hand on 10.13.25
 
 ```{r}
-state_facts <- read.csv("state_facts_handcleaned.csv")
+state_facts <- read.csv("csv_files/state_facts_handcleaned.csv")
 ```
