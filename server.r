@@ -4,12 +4,9 @@ library(ggplot2)
 library(leaflet)
 
 
-# healthcare_dataset <- read_csv("healthcare_dataset.csv")
-# state_facts <- read_csv("state_facts.csv")
+healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy these lines and then run in the console to be able to see them in the environment!
+state_facts <- read_csv("state_facts_handcleaned.csv")
 
-data <- readRDS("NEW_datasets.RDS")
-healthcare_dataset <- data$healthcare_dataset
-state_facts <- data$state_facts
 
 #function(input, output) {}
 
