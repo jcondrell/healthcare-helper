@@ -31,5 +31,5 @@ function(input,output){
 }
 
 
-geo <- geojson_read("states.geo.json", what = )
+geo <- geojson_read("states.geo.json", what = "sp") # we will wait on this cloropleth for MONDAY!!!!
 
