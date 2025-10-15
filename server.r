@@ -7,7 +7,11 @@ library(leaflet)
 healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy these lines and then run in the console to be able to see them in the environment!
 state_facts <- read_csv("state_facts_handcleaned.csv")
 
+gath
 
+
+state_facts %>%
+  filter(SPECIALTY == input$)
 
 ################################
 # 1 CHLOROPLETH:
@@ -17,7 +21,28 @@ geo <- geojson_read("states.geo.json", what = "sp") # we will wait on this cloro
 
 ######################################
 # 2 THIS IS HISTOGRAM:
-
+function(input, output) { #these function outputs are hard coded- they MUST say that
+  
+  output$main_plot <- renderPlot({ # all output functions are paired with a render function - make sure they match!!
+    hist( state_facts$eruptions, #what makes the plot
+          probability = TRUE, 
+          breaks      = as.numeric(input$n_breaks), #important for making the graph dynamic/changeable on the website! this is where you are referring to the inputs
+          xlab        = "States with Specialty Dominance",
+          main        = "Specialty Prominance by State"
+    )
+    
+    if (input$primary) { # if the thing inside this if statement is true, then this code will run
+      rug(state_facts$eruptions)
+    }
+    
+    if (input$primAndSec) {   # this responds to the check boxes on the webpage! when you check "Show density distribution," then this "if" statement runs
+      dens <- density(state_facts$eruptions)
+      lines(dens, col = "red")
+    }
+    
+  })
+  
+}
 
 ##################################
 

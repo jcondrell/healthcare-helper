@@ -15,3 +15,8 @@ cleaned "state-facts.csv" by hand on 10.13.25
 ```{r}
 state_facts <- read.csv("csv_files/state_facts_handcleaned.csv")
 ```
+
+
+```{r}
+gather(state_facts, key = "specialties", value = "physicianNumbers", Psychiatry:`Endocrinology, Diabetes, and Metabolism`)
+```

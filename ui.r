@@ -17,6 +17,29 @@ state_facts <- read_csv("state_facts_handcleaned.csv")
 # 2 THIS IS HISTOGRAM:
 
 
+sidebarLayout( # see ?sidebarLayout for help on what this does
+  sidebarPanel(  
+    selectInput(inputId = "n_breaks",
+                label = "Pick desired specialty:",
+                choices =  c(10,20,30,40),
+                selected = 20
+    ),
+    checkboxInput(inputId = "primary",
+                  label = strong("Show just the states with selected specialty as #1"), #putting the "strong" makes it bold
+                  value = FALSE
+    ), 
+    checkboxInput(inputId = "primAndSec",
+                  label = strong("Show the states that have selected specialty as their #1 and #2 (will give more results)"),
+                  value = FALSE
+    ),
+  ), 
+  mainPanel(
+    plotOutput("main_plot")
+  )
+  
+  
+)
+
 ##################################
 
 
