@@ -23,7 +23,7 @@ function(input,output){
   btn <- input$newButton # reevalutates input every time you click this button for new input data ... not used for anything, but makes this whole expression reevaluate so important!
   
   output$uSMap <- renderLeaflet({
-    
+    chlor
     leaflet() %>%
       setView(lng =sample(lons, 1),
               lat = sample(lats, 1),
