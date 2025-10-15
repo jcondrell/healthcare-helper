@@ -7,8 +7,27 @@ healthcare_dataset <- read_csv("healthcare_dataset.csv")
 state_facts <- read_csv("state_facts_handcleaned.csv")
 
 
+################################
+# 1 CHLOROPLETH:
+  
+###################################
+
+
+######################################
+# 2 THIS IS HISTOGRAM:
+
+
+##################################
+
+
+
+
+
+########################################
+# THIS IS LEAFLT:
 fluidPage(
   leafletOutput("uSMap"),
   br(),
   actionButton("newButton", "See which specialties are prominent in each state!")
 )
+########################################

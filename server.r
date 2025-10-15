@@ -8,10 +8,25 @@ healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy thes
 state_facts <- read_csv("state_facts_handcleaned.csv")
 
 
-#function(input, output) {}
+
+################################
+# 1 CHLOROPLETH:
+geo <- geojson_read("states.geo.json", what = "sp") # we will wait on this cloropleth for MONDAY!!!!
+#######################################
+
+
+######################################
+# 2 THIS IS HISTOGRAM:
+
+
+##################################
 
 
 
+
+
+##############################
+# THIS IS LEAFLT:
 function(input,output){
   
   lats <- -90:90 #vector of all integers between the two
@@ -29,10 +44,13 @@ function(input,output){
     
   })
 }
+###########################################
 
 
-geo <- geojson_read("states.geo.json", what = "sp") # we will wait on this cloropleth for MONDAY!!!!
 
+
+
+# MASTER PLAN:
 ### chloropleth   - density gradient per state by specialty
 ### histogram?    - pipe for highest amounts of specialists by state (search a speciality, produces a list of states where that specialty is most dominant)
 ### in that histogram, colorcode by if specialty is 1 or 2 dominant for that state
