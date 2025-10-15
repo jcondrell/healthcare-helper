@@ -33,6 +33,10 @@ function(input,output){
 
 geo <- geojson_read("states.geo.json", what = "sp") # we will wait on this cloropleth for MONDAY!!!!
 
+### chloropleth   - density gradient per state by specialty
+### histogram?    - pipe for highest amounts of specialists by state (search a speciality, produces a list of states where that specialty is most dominant)
+### in that histogram, colorcode by if specialty is 1 or 2 dominant for that state
+#### x axis is specialty, y axis is total # (divide total # by the total for that state)
 
 
 
