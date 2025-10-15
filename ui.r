@@ -21,8 +21,8 @@ sidebarLayout( # see ?sidebarLayout for help on what this does
   sidebarPanel(  
     selectInput(inputId = "n_breaks",
                 label = "Pick desired specialty:",
-                choices =  c(10,20,30,40),
-                selected = 20
+                choices =  c("specialty"),
+                selected = c("Pick your desired specialty")
     ),
     checkboxInput(inputId = "primary",
                   label = strong("Show just the states with selected specialty as #1"), #putting the "strong" makes it bold
@@ -48,9 +48,9 @@ sidebarLayout( # see ?sidebarLayout for help on what this does
 
 ########################################
 # THIS IS LEAFLT:
-fluidPage(
-  leafletOutput("uSMap"),
-  br(),
-  actionButton("newButton", "See which specialties are prominent in each state!")
-)
+# fluidPage(
+#   leafletOutput("uSMap"),
+#   br(),
+#   actionButton("newButton", "See which specialties are prominent in each state!")
+# )
 ########################################
