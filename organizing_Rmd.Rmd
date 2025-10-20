@@ -8,6 +8,8 @@ Library uploads
 ```{r}
 library(tidyverse)
 library(lubridate)
+library(tidyr)
+
 ```
 
 cleaned "state-facts.csv" by hand on 10.13.25
@@ -18,6 +20,17 @@ state_facts <- read.csv("state_facts_handcleaned.csv")
 
 
 ```{r}
-gather(state_facts, key = "specialty", value = "physicianNumbers", Psychiatry:`Endocrinology, Diabetes, and Metabolism`) %>%
+gather(state_facts, key = "specialty", value = "physicianNumbers", Psychiatry:Endocrinology..Diabetes..and.Metabolism) %>%
   write.csv(file = "specialtyByState.csv")
+
+# names(state_facts)
+
+
+# pivot_longer(state_facts, 
+#              cols = Psychiatry:Endocrinology..Diabetes..and.Metabolism,
+#              names_to = "specialty",
+#              values_to = "physicianNumbers") %>%
+#   write.csv(file = "specialtyByState.csv", row.names = FALSE)
+
+
 ```

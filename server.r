@@ -7,6 +7,9 @@ library(leaflet)
 healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy these lines and then run in the console to be able to see them in the environment!
 state_facts <- read_csv("state_facts_handcleaned.csv")
 
+specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+
+
 
 # state_facts %>%
 #   filter(SPECIALTY == input$)
@@ -22,6 +25,11 @@ state_facts <- read_csv("state_facts_handcleaned.csv")
 function(input, output) { #these function outputs are hard coded- they MUST say that
   
   output$main_plot <- renderPlot({ # all output functions are paired with a render function - make sure they match!!
+   
+     # filter data based on selected specialty
+    filtered_data <- specialtyByState %>%
+      filter(specialty == input$n_breaks)
+    
     hist( state_facts$"specialty", #what makes the plot
           probability = TRUE, 
           breaks      = as.numeric(input$n_breaks), #important for making the graph dynamic/changeable on the website! this is where you are referring to the inputs

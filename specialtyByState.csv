@@ -1,0 +1,417 @@
+"","Location","All.Other.Specialties","Total","specialty","physicianNumbers"
+"1","United States",190493,561051,"Psychiatry",59810
+"2","Alabama",2276,6243,"Psychiatry",509
+"3","Alaska",387,1111,"Psychiatry",130
+"4","Arizona",4025,11289,"Psychiatry",1000
+"5","Arkansas",1441,3977,"Psychiatry",374
+"6","California",22495,65064,"Psychiatry",8432
+"7","Colorado",3346,9451,"Psychiatry",982
+"8","Connecticut",2540,8583,"Psychiatry",1205
+"9","Delaware",544,1686,"Psychiatry",173
+"10","District of Columbia",1107,3691,"Psychiatry",511
+"11","Florida",12142,35127,"Psychiatry",2918
+"12","Georgia",4890,14483,"Psychiatry",1359
+"13","Hawaii",830,2416,"Psychiatry",344
+"14","Idaho",787,2045,"Psychiatry",165
+"15","Illinois",7281,21164,"Psychiatry",2141
+"16","Indiana",3109,9473,"Psychiatry",692
+"17","Iowa",1545,4338,"Psychiatry",402
+"18","Kansas",1470,4057,"Psychiatry",440
+"19","Kentucky",2348,6570,"Psychiatry",540
+"20","Louisiana",2888,7406,"Psychiatry",627
+"21","Maine",816,2548,"Psychiatry",338
+"22","Maryland",4802,13118,"Psychiatry",1651
+"23","Massachusetts",5848,19315,"Psychiatry",2740
+"24","Michigan",6491,19201,"Psychiatry",1777
+"25","Minnesota",3579,10463,"Psychiatry",946
+"26","Mississippi",1278,3484,"Psychiatry",266
+"27","Missouri",3895,11194,"Psychiatry",1071
+"28","Montana",587,1656,"Psychiatry",135
+"29","Nebraska",1216,3261,"Psychiatry",313
+"30","Nevada",1145,3633,"Psychiatry",348
+"31","New Hampshire",875,2579,"Psychiatry",266
+"32","New Jersey",5346,16565,"Psychiatry",1825
+"33","New Mexico",1059,3220,"Psychiatry",387
+"34","New York",14824,47552,"Psychiatry",6831
+"35","North Carolina",5861,16711,"Psychiatry",1765
+"36","North Dakota",387,1205,"Psychiatry",135
+"37","Ohio",7374,21918,"Psychiatry",1837
+"38","Oklahoma",1650,4811,"Psychiatry",480
+"39","Oregon",2447,7403,"Psychiatry",787
+"40","Pennsylvania",8397,25884,"Psychiatry",2800
+"41","Rhode Island",746,2354,"Psychiatry",318
+"42","South Carolina",2557,7487,"Psychiatry",801
+"43","South Dakota",510,1315,"Psychiatry",118
+"44","Tennessee",4006,10899,"Psychiatry",799
+"45","Texas",13457,39367,"Psychiatry",3578
+"46","Utah",1870,4757,"Psychiatry",398
+"47","Vermont",407,1335,"Psychiatry",238
+"48","Virginia",4567,13491,"Psychiatry",1512
+"49","Washington",4417,12523,"Psychiatry",1180
+"50","West Virginia",954,2766,"Psychiatry",252
+"51","Wisconsin",3425,10148,"Psychiatry",915
+"52","Wyoming",249,714,"Psychiatry",59
+"53","United States",190493,561051,"Surgery",69849
+"54","Alabama",2276,6243,"Surgery",891
+"55","Alaska",387,1111,"Surgery",129
+"56","Arizona",4025,11289,"Surgery",1340
+"57","Arkansas",1441,3977,"Surgery",539
+"58","California",22495,65064,"Surgery",7062
+"59","Colorado",3346,9451,"Surgery",984
+"60","Connecticut",2540,8583,"Surgery",1231
+"61","Delaware",544,1686,"Surgery",206
+"62","District of Columbia",1107,3691,"Surgery",585
+"63","Florida",12142,35127,"Surgery",4561
+"64","Georgia",4890,14483,"Surgery",1922
+"65","Hawaii",830,2416,"Surgery",252
+"66","Idaho",787,2045,"Surgery",233
+"67","Illinois",7281,21164,"Surgery",2316
+"68","Indiana",3109,9473,"Surgery",1129
+"69","Iowa",1545,4338,"Surgery",552
+"70","Kansas",1470,4057,"Surgery",510
+"71","Kentucky",2348,6570,"Surgery",955
+"72","Louisiana",2888,7406,"Surgery",960
+"73","Maine",816,2548,"Surgery",319
+"74","Maryland",4802,13118,"Surgery",1597
+"75","Massachusetts",5848,19315,"Surgery",2378
+"76","Michigan",6491,19201,"Surgery",2483
+"77","Minnesota",3579,10463,"Surgery",1251
+"78","Mississippi",1278,3484,"Surgery",461
+"79","Missouri",3895,11194,"Surgery",1256
+"80","Montana",587,1656,"Surgery",199
+"81","Nebraska",1216,3261,"Surgery",422
+"82","Nevada",1145,3633,"Surgery",396
+"83","New Hampshire",875,2579,"Surgery",312
+"84","New Jersey",5346,16565,"Surgery",2043
+"85","New Mexico",1059,3220,"Surgery",502
+"86","New York",14824,47552,"Surgery",6651
+"87","North Carolina",5861,16711,"Surgery",2157
+"88","North Dakota",387,1205,"Surgery",213
+"89","Ohio",7374,21918,"Surgery",3035
+"90","Oklahoma",1650,4811,"Surgery",511
+"91","Oregon",2447,7403,"Surgery",890
+"92","Pennsylvania",8397,25884,"Surgery",3373
+"93","Rhode Island",746,2354,"Surgery",294
+"94","South Carolina",2557,7487,"Surgery",912
+"95","South Dakota",510,1315,"Surgery",202
+"96","Tennessee",4006,10899,"Surgery",1491
+"97","Texas",13457,39367,"Surgery",4955
+"98","Utah",1870,4757,"Surgery",460
+"99","Vermont",407,1335,"Surgery",154
+"100","Virginia",4567,13491,"Surgery",1565
+"101","Washington",4417,12523,"Surgery",1361
+"102","West Virginia",954,2766,"Surgery",369
+"103","Wisconsin",3425,10148,"Surgery",1194
+"104","Wyoming",249,714,"Surgery",86
+"105","United States",190493,561051,"Anesthesiology",54415
+"106","Alabama",2276,6243,"Anesthesiology",602
+"107","Alaska",387,1111,"Anesthesiology",92
+"108","Arizona",4025,11289,"Anesthesiology",1284
+"109","Arkansas",1441,3977,"Anesthesiology",360
+"110","California",22495,65064,"Anesthesiology",6827
+"111","Colorado",3346,9451,"Anesthesiology",1001
+"112","Connecticut",2540,8583,"Anesthesiology",762
+"113","Delaware",544,1686,"Anesthesiology",131
+"114","District of Columbia",1107,3691,"Anesthesiology",305
+"115","Florida",12142,35127,"Anesthesiology",3357
+"116","Georgia",4890,14483,"Anesthesiology",1379
+"117","Hawaii",830,2416,"Anesthesiology",212
+"118","Idaho",787,2045,"Anesthesiology",144
+"119","Illinois",7281,21164,"Anesthesiology",2058
+"120","Indiana",3109,9473,"Anesthesiology",1325
+"121","Iowa",1545,4338,"Anesthesiology",483
+"122","Kansas",1470,4057,"Anesthesiology",411
+"123","Kentucky",2348,6570,"Anesthesiology",636
+"124","Louisiana",2888,7406,"Anesthesiology",618
+"125","Maine",816,2548,"Anesthesiology",243
+"126","Maryland",4802,13118,"Anesthesiology",1132
+"127","Massachusetts",5848,19315,"Anesthesiology",1632
+"128","Michigan",6491,19201,"Anesthesiology",1502
+"129","Minnesota",3579,10463,"Anesthesiology",743
+"130","Mississippi",1278,3484,"Anesthesiology",307
+"131","Missouri",3895,11194,"Anesthesiology",1139
+"132","Montana",587,1656,"Anesthesiology",218
+"133","Nebraska",1216,3261,"Anesthesiology",343
+"134","Nevada",1145,3633,"Anesthesiology",475
+"135","New Hampshire",875,2579,"Anesthesiology",253
+"136","New Jersey",5346,16565,"Anesthesiology",1799
+"137","New Mexico",1059,3220,"Anesthesiology",235
+"138","New York",14824,47552,"Anesthesiology",4469
+"139","North Carolina",5861,16711,"Anesthesiology",1290
+"140","North Dakota",387,1205,"Anesthesiology",93
+"141","Ohio",7374,21918,"Anesthesiology",1917
+"142","Oklahoma",1650,4811,"Anesthesiology",545
+"143","Oregon",2447,7403,"Anesthesiology",858
+"144","Pennsylvania",8397,25884,"Anesthesiology",2134
+"145","Rhode Island",746,2354,"Anesthesiology",157
+"146","South Carolina",2557,7487,"Anesthesiology",710
+"147","South Dakota",510,1315,"Anesthesiology",96
+"148","Tennessee",4006,10899,"Anesthesiology",980
+"149","Texas",13457,39367,"Anesthesiology",4272
+"150","Utah",1870,4757,"Anesthesiology",582
+"151","Vermont",407,1335,"Anesthesiology",120
+"152","Virginia",4567,13491,"Anesthesiology",1284
+"153","Washington",4417,12523,"Anesthesiology",1440
+"154","West Virginia",954,2766,"Anesthesiology",247
+"155","Wisconsin",3425,10148,"Anesthesiology",1124
+"156","Wyoming",249,714,"Anesthesiology",89
+"157","United States",190493,561051,"Emergency.Medicine",67928
+"158","Alabama",2276,6243,"Emergency.Medicine",587
+"159","Alaska",387,1111,"Emergency.Medicine",201
+"160","Arizona",4025,11289,"Emergency.Medicine",1462
+"161","Arkansas",1441,3977,"Emergency.Medicine",430
+"162","California",22495,65064,"Emergency.Medicine",7739
+"163","Colorado",3346,9451,"Emergency.Medicine",1351
+"164","Connecticut",2540,8583,"Emergency.Medicine",880
+"165","Delaware",544,1686,"Emergency.Medicine",255
+"166","District of Columbia",1107,3691,"Emergency.Medicine",389
+"167","Florida",12142,35127,"Emergency.Medicine",4416
+"168","Georgia",4890,14483,"Emergency.Medicine",1810
+"169","Hawaii",830,2416,"Emergency.Medicine",390
+"170","Idaho",787,2045,"Emergency.Medicine",293
+"171","Illinois",7281,21164,"Emergency.Medicine",2761
+"172","Indiana",3109,9473,"Emergency.Medicine",1147
+"173","Iowa",1545,4338,"Emergency.Medicine",444
+"174","Kansas",1470,4057,"Emergency.Medicine",399
+"175","Kentucky",2348,6570,"Emergency.Medicine",790
+"176","Louisiana",2888,7406,"Emergency.Medicine",869
+"177","Maine",816,2548,"Emergency.Medicine",367
+"178","Maryland",4802,13118,"Emergency.Medicine",1139
+"179","Massachusetts",5848,19315,"Emergency.Medicine",1819
+"180","Michigan",6491,19201,"Emergency.Medicine",3143
+"181","Minnesota",3579,10463,"Emergency.Medicine",1153
+"182","Mississippi",1278,3484,"Emergency.Medicine",457
+"183","Missouri",3895,11194,"Emergency.Medicine",1381
+"184","Montana",587,1656,"Emergency.Medicine",236
+"185","Nebraska",1216,3261,"Emergency.Medicine",287
+"186","Nevada",1145,3633,"Emergency.Medicine",585
+"187","New Hampshire",875,2579,"Emergency.Medicine",329
+"188","New Jersey",5346,16565,"Emergency.Medicine",1814
+"189","New Mexico",1059,3220,"Emergency.Medicine",467
+"190","New York",14824,47552,"Emergency.Medicine",4764
+"191","North Carolina",5861,16711,"Emergency.Medicine",2011
+"192","North Dakota",387,1205,"Emergency.Medicine",118
+"193","Ohio",7374,21918,"Emergency.Medicine",2996
+"194","Oklahoma",1650,4811,"Emergency.Medicine",734
+"195","Oregon",2447,7403,"Emergency.Medicine",1064
+"196","Pennsylvania",8397,25884,"Emergency.Medicine",3269
+"197","Rhode Island",746,2354,"Emergency.Medicine",343
+"198","South Carolina",2557,7487,"Emergency.Medicine",1093
+"199","South Dakota",510,1315,"Emergency.Medicine",122
+"200","Tennessee",4006,10899,"Emergency.Medicine",1084
+"201","Texas",13457,39367,"Emergency.Medicine",4779
+"202","Utah",1870,4757,"Emergency.Medicine",584
+"203","Vermont",407,1335,"Emergency.Medicine",176
+"204","Virginia",4567,13491,"Emergency.Medicine",1725
+"205","Washington",4417,12523,"Emergency.Medicine",1516
+"206","West Virginia",954,2766,"Emergency.Medicine",388
+"207","Wisconsin",3425,10148,"Emergency.Medicine",1238
+"208","Wyoming",249,714,"Emergency.Medicine",134
+"209","United States",190493,561051,"Radiology",51296
+"210","Alabama",2276,6243,"Radiology",642
+"211","Alaska",387,1111,"Radiology",104
+"212","Arizona",4025,11289,"Radiology",1037
+"213","Arkansas",1441,3977,"Radiology",408
+"214","California",22495,65064,"Radiology",5660
+"215","Colorado",3346,9451,"Radiology",843
+"216","Connecticut",2540,8583,"Radiology",769
+"217","Delaware",544,1686,"Radiology",163
+"218","District of Columbia",1107,3691,"Radiology",263
+"219","Florida",12142,35127,"Radiology",3289
+"220","Georgia",4890,14483,"Radiology",1364
+"221","Hawaii",830,2416,"Radiology",181
+"222","Idaho",787,2045,"Radiology",232
+"223","Illinois",7281,21164,"Radiology",1976
+"224","Indiana",3109,9473,"Radiology",957
+"225","Iowa",1545,4338,"Radiology",407
+"226","Kansas",1470,4057,"Radiology",398
+"227","Kentucky",2348,6570,"Radiology",592
+"228","Louisiana",2888,7406,"Radiology",640
+"229","Maine",816,2548,"Radiology",193
+"230","Maryland",4802,13118,"Radiology",1071
+"231","Massachusetts",5848,19315,"Radiology",1794
+"232","Michigan",6491,19201,"Radiology",1758
+"233","Minnesota",3579,10463,"Radiology",1447
+"234","Mississippi",1278,3484,"Radiology",346
+"235","Missouri",3895,11194,"Radiology",1038
+"236","Montana",587,1656,"Radiology",147
+"237","Nebraska",1216,3261,"Radiology",309
+"238","Nevada",1145,3633,"Radiology",326
+"239","New Hampshire",875,2579,"Radiology",238
+"240","New Jersey",5346,16565,"Radiology",1339
+"241","New Mexico",1059,3220,"Radiology",245
+"242","New York",14824,47552,"Radiology",3934
+"243","North Carolina",5861,16711,"Radiology",1519
+"244","North Dakota",387,1205,"Radiology",146
+"245","Ohio",7374,21918,"Radiology",2026
+"246","Oklahoma",1650,4811,"Radiology",409
+"247","Oregon",2447,7403,"Radiology",639
+"248","Pennsylvania",8397,25884,"Radiology",2394
+"249","Rhode Island",746,2354,"Radiology",178
+"250","South Carolina",2557,7487,"Radiology",623
+"251","South Dakota",510,1315,"Radiology",128
+"252","Tennessee",4006,10899,"Radiology",1080
+"253","Texas",13457,39367,"Radiology",3613
+"254","Utah",1870,4757,"Radiology",417
+"255","Vermont",407,1335,"Radiology",118
+"256","Virginia",4567,13491,"Radiology",1254
+"257","Washington",4417,12523,"Radiology",1238
+"258","West Virginia",954,2766,"Radiology",247
+"259","Wisconsin",3425,10148,"Radiology",1109
+"260","Wyoming",249,714,"Radiology",48
+"261","United States",190493,561051,"Cardiology",33002
+"262","Alabama",2276,6243,"Cardiology",390
+"263","Alaska",387,1111,"Cardiology",33
+"264","Arizona",4025,11289,"Cardiology",583
+"265","Arkansas",1441,3977,"Cardiology",220
+"266","California",22495,65064,"Cardiology",3267
+"267","Colorado",3346,9451,"Cardiology",428
+"268","Connecticut",2540,8583,"Cardiology",588
+"269","Delaware",544,1686,"Cardiology",109
+"270","District of Columbia",1107,3691,"Cardiology",247
+"271","Florida",12142,35127,"Cardiology",2359
+"272","Georgia",4890,14483,"Cardiology",896
+"273","Hawaii",830,2416,"Cardiology",107
+"274","Idaho",787,2045,"Cardiology",107
+"275","Illinois",7281,21164,"Cardiology",1343
+"276","Indiana",3109,9473,"Cardiology",554
+"277","Iowa",1545,4338,"Cardiology",262
+"278","Kansas",1470,4057,"Cardiology",228
+"279","Kentucky",2348,6570,"Cardiology",380
+"280","Louisiana",2888,7406,"Cardiology",429
+"281","Maine",816,2548,"Cardiology",161
+"282","Maryland",4802,13118,"Cardiology",730
+"283","Massachusetts",5848,19315,"Cardiology",1321
+"284","Michigan",6491,19201,"Cardiology",1069
+"285","Minnesota",3579,10463,"Cardiology",646
+"286","Mississippi",1278,3484,"Cardiology",192
+"287","Missouri",3895,11194,"Cardiology",699
+"288","Montana",587,1656,"Cardiology",76
+"289","Nebraska",1216,3261,"Cardiology",193
+"290","Nevada",1145,3633,"Cardiology",191
+"291","New Hampshire",875,2579,"Cardiology",162
+"292","New Jersey",5346,16565,"Cardiology",1233
+"293","New Mexico",1059,3220,"Cardiology",140
+"294","New York",14824,47552,"Cardiology",2904
+"295","North Carolina",5861,16711,"Cardiology",1021
+"296","North Dakota",387,1205,"Cardiology",52
+"297","Ohio",7374,21918,"Cardiology",1392
+"298","Oklahoma",1650,4811,"Cardiology",251
+"299","Oregon",2447,7403,"Cardiology",317
+"300","Pennsylvania",8397,25884,"Cardiology",1809
+"301","Rhode Island",746,2354,"Cardiology",148
+"302","South Carolina",2557,7487,"Cardiology",434
+"303","South Dakota",510,1315,"Cardiology",64
+"304","Tennessee",4006,10899,"Cardiology",708
+"305","Texas",13457,39367,"Cardiology",2209
+"306","Utah",1870,4757,"Cardiology",223
+"307","Vermont",407,1335,"Cardiology",57
+"308","Virginia",4567,13491,"Cardiology",773
+"309","Washington",4417,12523,"Cardiology",569
+"310","West Virginia",954,2766,"Cardiology",143
+"311","Wisconsin",3425,10148,"Cardiology",559
+"312","Wyoming",249,714,"Cardiology",26
+"313","United States",190493,561051,"Oncology..Cancer.",24668
+"314","Alabama",2276,6243,"Oncology..Cancer.",262
+"315","Alaska",387,1111,"Oncology..Cancer.",28
+"316","Arizona",4025,11289,"Oncology..Cancer.",419
+"317","Arkansas",1441,3977,"Oncology..Cancer.",151
+"318","California",22495,65064,"Oncology..Cancer.",2504
+"319","Colorado",3346,9451,"Oncology..Cancer.",389
+"320","Connecticut",2540,8583,"Oncology..Cancer.",425
+"321","Delaware",544,1686,"Oncology..Cancer.",71
+"322","District of Columbia",1107,3691,"Oncology..Cancer.",210
+"323","Florida",12142,35127,"Oncology..Cancer.",1495
+"324","Georgia",4890,14483,"Oncology..Cancer.",634
+"325","Hawaii",830,2416,"Oncology..Cancer.",70
+"326","Idaho",787,2045,"Oncology..Cancer.",64
+"327","Illinois",7281,21164,"Oncology..Cancer.",896
+"328","Indiana",3109,9473,"Oncology..Cancer.",401
+"329","Iowa",1545,4338,"Oncology..Cancer.",187
+"330","Kansas",1470,4057,"Oncology..Cancer.",149
+"331","Kentucky",2348,6570,"Oncology..Cancer.",244
+"332","Louisiana",2888,7406,"Oncology..Cancer.",257
+"333","Maine",816,2548,"Oncology..Cancer.",88
+"334","Maryland",4802,13118,"Oncology..Cancer.",696
+"335","Massachusetts",5848,19315,"Oncology..Cancer.",1268
+"336","Michigan",6491,19201,"Oncology..Cancer.",703
+"337","Minnesota",3579,10463,"Oncology..Cancer.",519
+"338","Mississippi",1278,3484,"Oncology..Cancer.",118
+"339","Missouri",3895,11194,"Oncology..Cancer.",520
+"340","Montana",587,1656,"Oncology..Cancer.",41
+"341","Nebraska",1216,3261,"Oncology..Cancer.",136
+"342","Nevada",1145,3633,"Oncology..Cancer.",106
+"343","New Hampshire",875,2579,"Oncology..Cancer.",104
+"344","New Jersey",5346,16565,"Oncology..Cancer.",747
+"345","New Mexico",1059,3220,"Oncology..Cancer.",134
+"346","New York",14824,47552,"Oncology..Cancer.",2239
+"347","North Carolina",5861,16711,"Oncology..Cancer.",808
+"348","North Dakota",387,1205,"Oncology..Cancer.",47
+"349","Ohio",7374,21918,"Oncology..Cancer.",1010
+"350","Oklahoma",1650,4811,"Oncology..Cancer.",172
+"351","Oregon",2447,7403,"Oncology..Cancer.",297
+"352","Pennsylvania",8397,25884,"Oncology..Cancer.",1261
+"353","Rhode Island",746,2354,"Oncology..Cancer.",122
+"354","South Carolina",2557,7487,"Oncology..Cancer.",262
+"355","South Dakota",510,1315,"Oncology..Cancer.",57
+"356","Tennessee",4006,10899,"Oncology..Cancer.",576
+"357","Texas",13457,39367,"Oncology..Cancer.",1864
+"358","Utah",1870,4757,"Oncology..Cancer.",175
+"359","Vermont",407,1335,"Oncology..Cancer.",49
+"360","Virginia",4567,13491,"Oncology..Cancer.",548
+"361","Washington",4417,12523,"Oncology..Cancer.",608
+"362","West Virginia",954,2766,"Oncology..Cancer.",107
+"363","Wisconsin",3425,10148,"Oncology..Cancer.",416
+"364","Wyoming",249,714,"Oncology..Cancer.",14
+"365","United States",190493,561051,"Endocrinology..Diabetes..and.Metabolism",9590
+"366","Alabama",2276,6243,"Endocrinology..Diabetes..and.Metabolism",84
+"367","Alaska",387,1111,"Endocrinology..Diabetes..and.Metabolism",7
+"368","Arizona",4025,11289,"Endocrinology..Diabetes..and.Metabolism",139
+"369","Arkansas",1441,3977,"Endocrinology..Diabetes..and.Metabolism",54
+"370","California",22495,65064,"Endocrinology..Diabetes..and.Metabolism",1078
+"371","Colorado",3346,9451,"Endocrinology..Diabetes..and.Metabolism",127
+"372","Connecticut",2540,8583,"Endocrinology..Diabetes..and.Metabolism",183
+"373","Delaware",544,1686,"Endocrinology..Diabetes..and.Metabolism",34
+"374","District of Columbia",1107,3691,"Endocrinology..Diabetes..and.Metabolism",74
+"375","Florida",12142,35127,"Endocrinology..Diabetes..and.Metabolism",590
+"376","Georgia",4890,14483,"Endocrinology..Diabetes..and.Metabolism",229
+"377","Hawaii",830,2416,"Endocrinology..Diabetes..and.Metabolism",30
+"378","Idaho",787,2045,"Endocrinology..Diabetes..and.Metabolism",20
+"379","Illinois",7281,21164,"Endocrinology..Diabetes..and.Metabolism",392
+"380","Indiana",3109,9473,"Endocrinology..Diabetes..and.Metabolism",159
+"381","Iowa",1545,4338,"Endocrinology..Diabetes..and.Metabolism",56
+"382","Kansas",1470,4057,"Endocrinology..Diabetes..and.Metabolism",52
+"383","Kentucky",2348,6570,"Endocrinology..Diabetes..and.Metabolism",85
+"384","Louisiana",2888,7406,"Endocrinology..Diabetes..and.Metabolism",118
+"385","Maine",816,2548,"Endocrinology..Diabetes..and.Metabolism",23
+"386","Maryland",4802,13118,"Endocrinology..Diabetes..and.Metabolism",300
+"387","Massachusetts",5848,19315,"Endocrinology..Diabetes..and.Metabolism",515
+"388","Michigan",6491,19201,"Endocrinology..Diabetes..and.Metabolism",275
+"389","Minnesota",3579,10463,"Endocrinology..Diabetes..and.Metabolism",179
+"390","Mississippi",1278,3484,"Endocrinology..Diabetes..and.Metabolism",59
+"391","Missouri",3895,11194,"Endocrinology..Diabetes..and.Metabolism",195
+"392","Montana",587,1656,"Endocrinology..Diabetes..and.Metabolism",17
+"393","Nebraska",1216,3261,"Endocrinology..Diabetes..and.Metabolism",42
+"394","Nevada",1145,3633,"Endocrinology..Diabetes..and.Metabolism",61
+"395","New Hampshire",875,2579,"Endocrinology..Diabetes..and.Metabolism",40
+"396","New Jersey",5346,16565,"Endocrinology..Diabetes..and.Metabolism",419
+"397","New Mexico",1059,3220,"Endocrinology..Diabetes..and.Metabolism",51
+"398","New York",14824,47552,"Endocrinology..Diabetes..and.Metabolism",936
+"399","North Carolina",5861,16711,"Endocrinology..Diabetes..and.Metabolism",279
+"400","North Dakota",387,1205,"Endocrinology..Diabetes..and.Metabolism",14
+"401","Ohio",7374,21918,"Endocrinology..Diabetes..and.Metabolism",331
+"402","Oklahoma",1650,4811,"Endocrinology..Diabetes..and.Metabolism",59
+"403","Oregon",2447,7403,"Endocrinology..Diabetes..and.Metabolism",104
+"404","Pennsylvania",8397,25884,"Endocrinology..Diabetes..and.Metabolism",447
+"405","Rhode Island",746,2354,"Endocrinology..Diabetes..and.Metabolism",48
+"406","South Carolina",2557,7487,"Endocrinology..Diabetes..and.Metabolism",95
+"407","South Dakota",510,1315,"Endocrinology..Diabetes..and.Metabolism",18
+"408","Tennessee",4006,10899,"Endocrinology..Diabetes..and.Metabolism",175
+"409","Texas",13457,39367,"Endocrinology..Diabetes..and.Metabolism",640
+"410","Utah",1870,4757,"Endocrinology..Diabetes..and.Metabolism",48
+"411","Vermont",407,1335,"Endocrinology..Diabetes..and.Metabolism",16
+"412","Virginia",4567,13491,"Endocrinology..Diabetes..and.Metabolism",263
+"413","Washington",4417,12523,"Endocrinology..Diabetes..and.Metabolism",194
+"414","West Virginia",954,2766,"Endocrinology..Diabetes..and.Metabolism",59
+"415","Wisconsin",3425,10148,"Endocrinology..Diabetes..and.Metabolism",168
+"416","Wyoming",249,714,"Endocrinology..Diabetes..and.Metabolism",9

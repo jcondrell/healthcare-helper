@@ -6,6 +6,9 @@ library(leaflet)
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
 state_facts <- read_csv("state_facts_handcleaned.csv")
 
+specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+
+
 
 ################################
 # 1 CHLOROPLETH:
@@ -21,7 +24,7 @@ sidebarLayout( # see ?sidebarLayout for help on what this does
   sidebarPanel(  
     selectInput(inputId = "n_breaks",
                 label = "Pick desired specialty:",
-                choices =  c("specialty"),
+                choices = unique(specialtyByState$specialty),
                 selected = c("Pick your desired specialty")
     ),
     checkboxInput(inputId = "primary",
