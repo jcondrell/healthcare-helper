@@ -19,28 +19,21 @@ specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
 ######################################
 # 2 THIS IS HISTOGRAM:
 
-
-sidebarLayout( # see ?sidebarLayout for help on what this does
+sidebarLayout(
   sidebarPanel(  
     selectInput(inputId = "n_breaks",
                 label = "Pick desired specialty:",
                 choices = unique(specialtyByState$specialty),
                 selected = c("Pick your desired specialty")
     ),
-    checkboxInput(inputId = "primary",
-                  label = strong("Show just the states with selected specialty as #1"), #putting the "strong" makes it bold
+    checkboxInput(inputId = "show_percent",
+                  label = strong("Show percentage of state's total physicians"),
                   value = FALSE
-    ), 
-    checkboxInput(inputId = "primAndSec",
-                  label = strong("Show the states that have selected specialty as their #1 and #2 (will give more results)"),
-                  value = FALSE
-    ),
-  ), 
+    )
+  ),
   mainPanel(
     plotOutput("main_plot")
   )
-  
-  
 )
 
 ##################################
