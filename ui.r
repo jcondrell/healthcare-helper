@@ -39,14 +39,8 @@ sidebarLayout(
 ##################################
 
 
+######################################
+# THIS IS THE PIE CHART PER STATE!
 
 
-
-########################################
-# THIS IS LEAFLT:
-# fluidPage(
-#   leafletOutput("uSMap"),
-#   br(),
-#   actionButton("newButton", "See which specialties are prominent in each state!")
-# )
-########################################
+##############################################
