@@ -3,6 +3,7 @@ library(tidyverse)
 library(ggplot2)
 library(leaflet)
 library(dplyr)
+library(ggpubr)
 
 
 
@@ -83,7 +84,32 @@ function(input, output) {
 
 
 ######################################
-# THIS IS THE PIE CHART PER STATE!
+# 3 THIS IS THE PIE CHART PER STATE!
 
+output$pie_chart <- renderPlot({
+  
+  state_data <- specialtyByState %>%
+    filter(state == input$state_select) %>%
+    mutate(
+      percentage = physicianNumbers / sum(physicianNumbers) * 100,
+      label = paste0(round(percentage, 1), "%")
+    )
+  
+  ggplot(state_data, aes(x = "", y = physicianNumbers, fill = specialty)) +
+    geom_bar(stat = "identity", width = 1) +
+    coord_polar("y", start = 0) +
+    geom_text(aes(label = label), 
+              position = position_stack(vjust = 0.5),
+              color = "white",
+              fontface = "bold",
+              size = 4) +
+    labs(title = paste("Distribution of Medical Specialties in", input$state_select),
+         fill = "Specialty") +
+    theme_void() +
+    theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+  
+})
+
+}
 
 ##############################################

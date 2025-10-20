@@ -9,7 +9,9 @@ state_facts <- read_csv("state_facts_handcleaned.csv")
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
 
 
-
+ui <- fluidPage(
+  
+  titlePanel("Physician Specialty Analysis"),
 ################################
 # 1 CHLOROPLETH:
   
@@ -40,7 +42,16 @@ sidebarLayout(
 
 
 ######################################
-# THIS IS THE PIE CHART PER STATE!
+# 3 THIS IS THE PIE CHART PER STATE!
 
+selectInput("state_select",
+            "Select a State:",
+            choices = unique(specialtyByState$state),
+            selected = unique(specialtyByState$state)[1])
+
+plotOutput("pie_chart")
 
 ##############################################
+
+
+
