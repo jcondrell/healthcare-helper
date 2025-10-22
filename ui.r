@@ -50,6 +50,8 @@ tabPanel("Find most prominent specialties by state",
                     value = FALSE
       )
     ),
+    
+    # this makes the heading within the tab:
     mainPanel(
       h3("Understanding Specialty Distribution"),
       p("This chart can help you find the top 10 states with the most physicians in your selected specialty. 
@@ -71,8 +73,12 @@ tabPanel("State by state pie chart specialty analysis",
               "Select a State:",
               choices = unique(specialtyByState$state),
               selected = unique(specialtyByState$state)[1]),
+  mainPanel(
+    h3("Understanding specialty percentages within selected states:"),
+    p("This pie chart allows you to select a state and see which specialties are most dominant in that state."),
   
   plotOutput("pie_chart")
+  )
 
 )
 ##############################################
