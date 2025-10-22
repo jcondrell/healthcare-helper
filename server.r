@@ -106,10 +106,18 @@ function(input, output) {
       theme_void() +
       theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold", margin = margin(b = 20)),
             plot.margin = margin(t = 20, r = 20, b = 20, l = 20))  # Add margins around entire plot
-    
-    
   })
-
+  
+  
+# This is a bit to give the bit of information on the total number of physicians in the state:
+     output$total_physicians <- renderText({
+      total <- specialtyByState %>%
+        filter(Location == input$state_select) %>%
+        summarise(total = sum(physicianNumbers)) %>%
+        pull(total)
+      
+      paste0("Total Physicians in ", input$state_select, ": ", format(total, big.mark = ",")) #used paste0 here instead of just paste to make the weird space in between the state listed and the colon
+     })
 
 ##############################################
   
