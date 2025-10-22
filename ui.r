@@ -13,7 +13,8 @@ specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsA
 
 
 # BEGINNING OF MAIN SHINY CODES:
-ui <- navbarPage("Healthcare Helper",
+ui <- navbarPage(
+  title = tags$span(style = "font-weight: bold; color: red;", "Healthcare Helper"), # made the title page "Healthcare Helper" main tab in the top left in bold and red
                  
          # Really wanted to change all the fonts to Times New Roman... :
          tags$head(
