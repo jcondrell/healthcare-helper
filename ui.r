@@ -9,9 +9,13 @@ state_facts <- read_csv("state_facts_handcleaned.csv")
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
 
 
-ui <- fluidPage(
+ui <- navbarPage("My App Title",
+           tabPanel("Home",
+                    h2("Welcome to the healthcare helper app!"),
+                    p("We are here to help you find accesible healthcare data to better help you assess your healthcare needs and options!")
+           ),
+           
   
-  titlePanel("Physician Specialty Analysis"),
 ################################
 # 1 CHLOROPLETH:
   
@@ -20,38 +24,42 @@ ui <- fluidPage(
 
 ######################################
 # 2 THIS IS HISTOGRAM:
-
-sidebarLayout(
-  sidebarPanel(  
-    selectInput(inputId = "n_breaks",
-                label = "Pick desired specialty:",
-                choices = unique(specialtyByState$specialty),
-                selected = c("Pick your desired specialty")
+tabPanel("Find specialties by state",
+         
+  sidebarLayout(
+    sidebarPanel(  
+      selectInput(inputId = "n_breaks",
+                  label = "Pick desired specialty:",
+                  choices = unique(specialtyByState$specialty),
+                  selected = c("Pick your desired specialty")
+      ),
+      checkboxInput(inputId = "show_percent",
+                    label = strong("Show percentage of state's total physicians"),
+                    value = FALSE
+      )
     ),
-    checkboxInput(inputId = "show_percent",
-                  label = strong("Show percentage of state's total physicians"),
-                  value = FALSE
+    mainPanel(
+      plotOutput("main_plot")
     )
-  ),
-  mainPanel(
-    plotOutput("main_plot")
   )
-)
-
+  
+),
 ##################################
 
 
 ######################################
 # 3 THIS IS THE PIE CHART PER STATE!
+tabPanel("Tab 2",
+         
+  selectInput("state_select",
+              "Select a State:",
+              choices = unique(specialtyByState$state),
+              selected = unique(specialtyByState$state)[1]),
+  
+  plotOutput("pie_chart")
 
-selectInput("state_select",
-            "Select a State:",
-            choices = unique(specialtyByState$state),
-            selected = unique(specialtyByState$state)[1])
-
-plotOutput("pie_chart")
-
+)
 ##############################################
 
 
-
+) # connects to navbarPage at top!
