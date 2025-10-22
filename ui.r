@@ -71,8 +71,8 @@ tabPanel("State by state pie chart specialty analysis",
          
   selectInput("state_select",
               "Select a State:",
-              choices = unique(specialtyByState$state),
-              selected = unique(specialtyByState$state)[1]),
+              choices = unique(specialtyByState$Location),
+              selected = unique(specialtyByState$Location)[1]),
   mainPanel(
     h3("Understanding specialty percentages within selected states:"),
     p("This pie chart allows you to select a state and see which specialties are most dominant in that state."),
