@@ -5,8 +5,9 @@ library(leaflet)
 
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
 state_facts <- read_csv("state_facts_handcleaned.csv")
-
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE) # for pie chart (includes all specialties and "other" column in state_facts)
+
 
 
 ui <- navbarPage("Healthcare Helper",
@@ -42,7 +43,7 @@ tabPanel("Find most prominent specialties by state",
     sidebarPanel(  
       selectInput(inputId = "n_breaks",
                   label = "Pick desired specialty:",
-                  choices = unique(specialtyByState$specialty),
+                  choices = unique(specialtyByStateWithOther$specialty),
                   selected = c("Pick your desired specialty")
       ),
       checkboxInput(inputId = "show_percent",
@@ -75,7 +76,8 @@ tabPanel("State by state pie chart specialty analysis",
               selected = unique(specialtyByState$Location)[1]),
   mainPanel(
     h3("Understanding specialty percentages within selected states:"),
-    p("This pie chart allows you to select a state and see which specialties are most dominant in that state."),
+    p("This pie chart allows you to select a state and see which specialties are most dominant in that state.
+      Of note, 'Other Specialties' was included in this metrics to show hollistic distribution."),
   
   plotOutput("pie_chart")
   )

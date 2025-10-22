@@ -23,6 +23,8 @@ state_facts <- read.csv("state_facts_handcleaned.csv")
 gather(state_facts, key = "specialty", value = "physicianNumbers", Psychiatry:Endocrinology..Diabetes..and.Metabolism) %>%
   write.csv(file = "specialtyByState.csv")
 
+gather(state_facts, key = "specialty", value = "physicianNumbers", Psychiatry:All.Other.Specialties) %>%
+  write.csv(file = "specialtyByState_WithOther.csv")
 # names(state_facts)
 
 

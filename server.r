@@ -8,8 +8,10 @@ library(ggpubr)
 
 # Importing all csv datasets:
 healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy these lines and then run in the console to be able to see them in the environment!
-state_facts <- read_csv("state_facts_handcleaned.csv")
-specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+# state_facts <- read_csv("state_facts_handcleaned.csv")
+specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE) # for the histogram (2)
+specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE) # for pie chart (3) (includes all specialties and "other" column in state_facts)
+
 
 
 function(input, output) {
@@ -84,7 +86,7 @@ function(input, output) {
 
   output$pie_chart <- renderPlot({
     
-    state_data <- specialtyByState %>%
+    state_data <- specialtyByStateWithOther %>%
       filter(Location == input$state_select) %>%
       mutate(
         percentage = physicianNumbers / sum(physicianNumbers) * 100,
@@ -99,7 +101,7 @@ function(input, output) {
                 color = "white",
                 fontface = "bold",
                 size = 4) +
-      labs(title = paste("Distribution of Medical Specialties in", input$state_select),
+      labs(title = paste(input$state_select, "Distribution of Physicians"),
            fill = "Specialty") +
       theme_void() +
       theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold", margin = margin(b = 20)),
