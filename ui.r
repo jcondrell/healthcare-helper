@@ -9,7 +9,19 @@ state_facts <- read_csv("state_facts_handcleaned.csv")
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
 
 
-ui <- navbarPage("My App Title",
+ui <- navbarPage("Healthcare Helper",
+                 
+         # Really wanted to change all the fonts to Times New Roman... :
+         tags$head(
+           tags$style(HTML("
+            body {
+              font-family: 'Times New Roman', Times, serif;
+             }
+          "))
+         ),
+         
+                 
+        # Creating the tabs and the main header page:
            tabPanel("Home",
                     h2("Welcome to the healthcare helper app!"),
                     p("We are here to help you find accesible healthcare data to better help you assess your healthcare needs and options!")
@@ -24,7 +36,7 @@ ui <- navbarPage("My App Title",
 
 ######################################
 # 2 THIS IS HISTOGRAM:
-tabPanel("Find specialties by state",
+tabPanel("Find most prominent specialties by state",
          
   sidebarLayout(
     sidebarPanel(  
@@ -39,6 +51,10 @@ tabPanel("Find specialties by state",
       )
     ),
     mainPanel(
+      h3("Understanding Specialty Distribution"),
+      p("This chart can help you find the top 10 states with the most physicians in your selected specialty. 
+        States highlighted in red indicate where this specialty is the #1 most common specialty 
+        in that state, while blue indicates that there is still a high quantity of physicians in that specialty, but it may not be #1 in that state."),
       plotOutput("main_plot")
     )
   )
@@ -49,7 +65,7 @@ tabPanel("Find specialties by state",
 
 ######################################
 # 3 THIS IS THE PIE CHART PER STATE!
-tabPanel("Tab 2",
+tabPanel("State by state pie chart specialty analysis",
          
   selectInput("state_select",
               "Select a State:",
@@ -62,4 +78,4 @@ tabPanel("Tab 2",
 ##############################################
 
 
-) # connects to navbarPage at top!
+) # connects to navbarPage at top! must engulf WHOLE THING!
