@@ -1,15 +1,18 @@
+# Libraries:
 library(shiny)   # shiny comes with the sidebar page ... ui defines where outputs and inputs are on the webpage
 library(tidyverse)
 library(ggplot2)
 library(leaflet)
 
+
+# Importing all csv datasets: 
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
-state_facts <- read_csv("state_facts_handcleaned.csv")
-specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE) # for histogram
 specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE) # for pie chart (includes all specialties and "other" column in state_facts)
 
 
 
+# BEGINNING OF MAIN SHINY CODES:
 ui <- navbarPage("Healthcare Helper",
                  
          # Really wanted to change all the fonts to Times New Roman... :

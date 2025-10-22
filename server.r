@@ -1,3 +1,4 @@
+# Libraries:
 library(shiny)   # shiny comes with the sidebar page ... where you use the render calls
 library(tidyverse)
 library(ggplot2)
@@ -6,14 +7,13 @@ library(dplyr)
 library(ggpubr)
 
 
-# Importing all csv datasets:
+# Importing all csv datasets: 
 healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy these lines and then run in the console to be able to see them in the environment!
-# state_facts <- read_csv("state_facts_handcleaned.csv")
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE) # for the histogram (2)
 specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE) # for pie chart (3) (includes all specialties and "other" column in state_facts)
 
 
-
+# BEGINNING OF MAIN CODE:
 function(input, output) {
   
 
@@ -96,11 +96,11 @@ function(input, output) {
     ggplot(state_data, aes(x = "", y = physicianNumbers, fill = specialty)) +
       geom_bar(stat = "identity", width = 1) +
       coord_polar("y", start = 0) +
-      geom_text(aes(label = label), 
-                position = position_stack(vjust = 0.5),
-                color = "white",
+      geom_text(aes(x = 1.7, label = label), # added in x = 1.7 so that the percentages were a bit farther away
+                position = position_stack(vjust = 0.5), 
+                color = "black", # since the numbers are now outside the chart, changed this to black
                 fontface = "bold",
-                size = 4) +
+                size = 5) +
       labs(title = paste(input$state_select, "Distribution of Physicians"),
            fill = "Specialty") +
       theme_void() +
