@@ -14,8 +14,8 @@ specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsA
 
 # BEGINNING OF MAIN SHINY CODES:
 ui <- navbarPage(
-  title = tags$span(style = "font-weight: bold; color: red;", "Healthcare Helper"), # made the title page "Healthcare Helper" main tab in the top left in bold and red
-                 
+  title = tags$span(style = "font-weight: bold; color: red;", tags$em("Healthcare Helper"), tags$sup("™")),
+  
          # Really wanted to change all the fonts to Times New Roman... :
          tags$head(
            tags$style(HTML("
@@ -29,7 +29,7 @@ ui <- navbarPage(
         # Creating the tabs and the main header page:
           tabPanel("Home",
                    tags$div(style = "text-align: center; padding: 60px 20px;",
-                            h1("Welcome to the Healthcare Helper App!", 
+                            h1(tags$span("Welcome to the ", tags$em("Healthcare Helper"), " App!"), #all this extra stuff is it italicizing it
                                style = "font-size: 56px; font-weight: bold; color: #d32f2f; margin-bottom: 40px;"),
                             p("We are here to help you find accessible healthcare data to better help you assess your healthcare needs and options!",
                               style = "font-size: 28px; line-height: 1.6; max-width: 900px; margin: 0 auto 50px;"),
@@ -41,7 +41,7 @@ ui <- navbarPage(
                    )
           ),
   
-           
+      
   
 ################################
 # 1 CHLOROPLETH:
