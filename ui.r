@@ -35,7 +35,23 @@ ui <- navbarPage(
   
 ################################
 # 1 CHLOROPLETH:
-  
+  tabPanel("Specialty Map by State",
+           sidebarLayout(
+             sidebarPanel(
+               selectInput("specialty_select",
+                           "Select Specialty:",
+                           choices = unique(specialtyByState$specialty),
+                           selected = unique(specialtyByState$specialty)[1])
+             ),
+             mainPanel(
+               h3("Geographic Distribution of Selected Specialty"),
+               p("This map shows the distribution of physicians in your selected specialty across all states. 
+          Darker colors indicate higher numbers of physicians."),
+               leafletOutput("chloropleth_map", height = 600)
+             )
+           )
+  ),
+
 ###################################
 
 

@@ -39,7 +39,7 @@ function(input, output) {
     bins <- c(0, 500, 1000, 2000, 5000, 10000, 20000, 50000, Inf)
     pal <- colorBin("YlOrRd", domain = states_with_data$physicianNumbers, bins = bins)
     
-    # Create labels
+    # Creating the labels
     labels <- sprintf(
       "<strong>%s</strong><br/>%g physicians in %s",
       states_with_data$name, 
@@ -47,10 +47,10 @@ function(input, output) {
       input$specialty_select
     ) %>% lapply(HTML)
     
-    # Create map
+    # Creating actual map
     leaflet(states_with_data) %>%
       setView(-96, 37.8, 4) %>%
-      addProviderTiles("CartoDB.Positron") %>%  # Changed to a free tile provider
+      addProviderTiles("CartoDB.Positron") %>%  
       addPolygons(
         fillColor = ~pal(physicianNumbers),
         weight = 2,
