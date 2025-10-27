@@ -27,10 +27,20 @@ ui <- navbarPage(
          
                  
         # Creating the tabs and the main header page:
-           tabPanel("Home",
-                    h2("Welcome to the healthcare helper app!"),
-                    p("We are here to help you find accessible healthcare data to better help you assess your healthcare needs and options!")
-           ),
+          tabPanel("Home",
+                   tags$div(style = "text-align: center; padding: 60px 20px;",
+                            h1("Welcome to the Healthcare Helper App!", 
+                               style = "font-size: 56px; font-weight: bold; color: #d32f2f; margin-bottom: 40px;"),
+                            p("We are here to help you find accessible healthcare data to better help you assess your healthcare needs and options!",
+                              style = "font-size: 28px; line-height: 1.6; max-width: 900px; margin: 0 auto 50px;"),
+                            
+                            # Add image
+                            tags$img(src = "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
+                                     alt = "Medical stethoscope",
+                                     style = "width: 100%; max-width: 600px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);")
+                   )
+          ),
+  
            
   
 ################################
