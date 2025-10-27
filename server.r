@@ -104,7 +104,9 @@ function(input, output) {
       labs(title = paste(input$state_select, "Distribution of Physicians"),
            fill = "Specialty") +
       theme_void() +
-      theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold", margin = margin(b = 20)),
+      theme(plot.title = element_text(hjust = 0.5, size = 20, face = "bold", margin = margin(b = 20)),
+            legend.title = element_text(size = 14, face = "bold"),
+            legend.text = element_text(size = 12),
             plot.margin = margin(t = 20, r = 20, b = 20, l = 20))  # Add margins around entire plot
   })
   
