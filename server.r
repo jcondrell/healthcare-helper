@@ -64,7 +64,7 @@ function(input, output) {
            y = "Number of Physicians",
            fill = "") +
       theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10))
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14))
     
     # Add percentage labels if checkbox is checked
     if (input$show_percent) {
