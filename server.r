@@ -21,24 +21,38 @@ function(input, output) {
 
 ################################
 # 1 CHLOROPLETH:
-  output$main_plot <- renderLeaflet({
-    states <- read_sf("us-states.geojson")
+  
+  output$chloropleth_map <- renderLeaflet({
     
-    bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
-    pal <- colorBin("YlOrRd", domain = states$density, bins = bins)
+    states <- read_sf("us-states.geojson") # states geo data
     
+    # Get data for selected specialty
+    specialty_data <- specialtyByState %>%
+      filter(specialty == input$specialty_select, Location != "United States") %>%
+      select(Location, physicianNumbers)
+    
+    # used LEFT_JOIN!! with geographic data (you'll need to match state names)
+    states_with_data <- states %>%
+      left_join(specialty_data, by = c("name" = "Location"))
+    
+    
+    bins <- c(0, 500, 1000, 2000, 5000, 10000, 20000, 50000, Inf)
+    pal <- colorBin("YlOrRd", domain = states_with_data$physicianNumbers, bins = bins)
+    
+    # Create labels
     labels <- sprintf(
-      "<strong>%s</strong><br/>%g people / mi<sup>2</sup>",
-      states$name, states$density
+      "<strong>%s</strong><br/>%g physicians in %s",
+      states_with_data$name, 
+      states_with_data$physicianNumbers,
+      input$specialty_select
     ) %>% lapply(HTML)
     
-    leaflet(states) %>%
+    # Create map
+    leaflet(states_with_data) %>%
       setView(-96, 37.8, 4) %>%
-      addProviderTiles("MapBox", options = providerTileOptions(
-        id = "mapbox.light",
-        accessToken = Sys.getenv('MAPBOX_ACCESS_TOKEN'))) %>%
+      addProviderTiles("CartoDB.Positron") %>%  # Changed to a free tile provider
       addPolygons(
-        fillColor = ~pal(density),
+        fillColor = ~pal(physicianNumbers),
         weight = 2,
         opacity = 1,
         color = "white",
@@ -55,11 +69,12 @@ function(input, output) {
           style = list("font-weight" = "normal", padding = "3px 8px"),
           textsize = "15px",
           direction = "auto")) %>%
-      addLegend(pal = pal, values = ~density, opacity = 0.7, title = NULL,
-                position = "bottomright")
-    
-    
-    
+      addLegend(
+        pal = pal, 
+        values = ~physicianNumbers, 
+        opacity = 0.7, 
+        title = paste(input$specialty_select, "Physicians"),
+        position = "bottomright")
   })
   
 #######################################
