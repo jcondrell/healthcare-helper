@@ -2,11 +2,11 @@
 library(shiny)   # shiny comes with the sidebar page ... where you use the render calls
 library(tidyverse)
 library(ggplot2)
-library(leaflet)
+library(leaflet) # for chloropleth
 library(dplyr)
 library(ggpubr)
-library(sf)
-library(htmltools)
+library(sf) # for chloropleth
+library(htmltools) # for chloropleth
 
 
 # Importing all csv datasets: 
