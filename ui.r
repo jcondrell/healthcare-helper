@@ -45,11 +45,10 @@ ui <- navbarPage(
              ),
              mainPanel(
                h3("Geographic Distribution of Selected Specialty"),
-               p("This map shows the distribution of physicians in your selected specialty across all states. 
-          Darker colors indicate higher numbers of physicians. Of note, this map displays a gradient based on 
-          the total percentage of physicans in a given state. Additionally, this percentage does not include the 'Other 
-          Physcian' options in its total physician count, as there is not specific enough data to qualify for 
-          consideration in this map."),
+               p("This map shows what percentage of each state's physicians work in your selected specialty. 
+          Colors range from purple (lower percentage) to yellow (higher percentage), making it easy 
+          to identify where this specialty is most concentrated. Note: The 'Other Specialties' category is excluded from 
+          the total physician count for this calculation."),
                leafletOutput("chloropleth_map", height = 600)
              )
            )
