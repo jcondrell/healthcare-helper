@@ -37,7 +37,7 @@ function(input, output) {
     
     
     bins <- c(0, 500, 1000, 2000, 5000, 10000, 20000, 50000, Inf)
-    pal <- colorBin("RdPu", domain = states_with_data$physicianNumbers, bins = bins) #changed here to darker colors since a lot of them were less!
+    pal <- colorBin("Reds", domain = states_with_data$physicianNumbers, bins = bins) #changed here to darker colors since a lot of them were less!
     
     # Creating the labels
     labels <- sprintf(
