@@ -24,35 +24,45 @@ function(input, output) {
   
   output$chloropleth_map <- renderLeaflet({
     
-    states <- read_sf("us-states.geojson") # states geo data
+    # Read the states geographic data
+    states <- read_sf("us-states.geojson")
     
-    # Get data for selected specialty
+    # Calculate total physicians per state
+    state_totals <- specialtyByState %>%
+      filter(Location != "United States") %>%
+      group_by(Location) %>%
+      summarise(total_physicians = sum(physicianNumbers))
+    
+    # Get data for selected specialty and calculate percentage
     specialty_data <- specialtyByState %>%
       filter(specialty == input$specialty_select, Location != "United States") %>%
-      select(Location, physicianNumbers)
+      left_join(state_totals, by = "Location") %>%
+      mutate(percentage = (physicianNumbers / total_physicians) * 100) %>%
+      select(Location, physicianNumbers, percentage)
     
-    # used LEFT_JOIN!! with geographic data (you'll need to match state names)
+    # Join with geographic data
     states_with_data <- states %>%
       left_join(specialty_data, by = c("name" = "Location"))
     
+    # Create color palette based on PERCENTAGE instead of raw numbers
+    bins <- c(0, 2, 4, 6, 8, 10, 12, 15, 17, 20, 25, 30, Inf)
+    pal <- colorBin("viridis", domain = states_with_data$percentage, bins = bins)
     
-    bins <- c(0, 500, 1000, 2000, 5000, 10000, 20000, 50000, Inf)
-    pal <- colorBin("Reds", domain = states_with_data$physicianNumbers, bins = bins) #changed here to darker colors since a lot of them were less!
-    
-    # Creating the labels
+    # Create labels showing both percentage and raw numbers
     labels <- sprintf(
-      "<strong>%s</strong><br/>%g physicians in %s",
+      "<strong>%s</strong><br/>%.1f%% of physicians (%s total)<br/>in %s",
       states_with_data$name, 
-      states_with_data$physicianNumbers,
+      states_with_data$percentage,
+      format(states_with_data$physicianNumbers, big.mark = ","),
       input$specialty_select
     ) %>% lapply(HTML)
     
-    # Creating actual map
+    # Create map
     leaflet(states_with_data) %>%
       setView(-96, 37.8, 4) %>%
-      addProviderTiles("CartoDB.Positron") %>%  
+      addProviderTiles("CartoDB.Positron") %>%
       addPolygons(
-        fillColor = ~pal(physicianNumbers),
+        fillColor = ~pal(percentage),  # Changed to percentage
         weight = 2,
         opacity = 1,
         color = "white",
@@ -71,9 +81,9 @@ function(input, output) {
           direction = "auto")) %>%
       addLegend(
         pal = pal, 
-        values = ~physicianNumbers, 
+        values = ~percentage,  # Changed to percentage
         opacity = 0.7, 
-        title = paste(input$specialty_select, "Physicians"),
+        title = paste(input$specialty_select, "(% of state)"),
         position = "bottomright")
   })
   
