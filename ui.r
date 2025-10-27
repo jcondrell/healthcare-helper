@@ -29,7 +29,7 @@ ui <- navbarPage(
         # Creating the tabs and the main header page:
            tabPanel("Home",
                     h2("Welcome to the healthcare helper app!"),
-                    p("We are here to help you find accesible healthcare data to better help you assess your healthcare needs and options!")
+                    p("We are here to help you find accessible healthcare data to better help you assess your healthcare needs and options!")
            ),
            
   
