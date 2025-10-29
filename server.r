@@ -400,16 +400,26 @@ function(input, output) {
        }
      })
      
-     # Diagnosis distribution chart
+  # Diagnosis distribution chart
      output$diagnosis_distribution <- renderPlot({
        data <- risk_data()
        
        if (nrow(data$diagnosis_counts) > 0) {
+         # Define color mapping for diagnoses (red = bad, green = good)
+         diagnosis_colors <- c(
+           "Healthy" = "#2ECC71",                    # Green
+           "Hypertension" = "#F39C12",               # Orange
+           "Hyperlipidemia" = "#E67E22",             # Dark Orange
+           "Diabetes" = "#E74C3C",                   # Red-Orange
+           "Coronary Artery Disease" = "#C0392B"     # Dark Red
+         )
+         
          ggplot(data$diagnosis_counts, aes(x = reorder(Diagnosis, -n), y = n, fill = Diagnosis)) +
            geom_col() +
            geom_text(aes(label = paste0(percentage, "%")), vjust = -0.5, fontface = "bold") +
            labs(x = "Diagnosis",
                 y = "Number of Patients") +
+           scale_fill_manual(values = diagnosis_colors) +  # Add this line
            scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
            theme_minimal() +
            theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
@@ -421,7 +431,6 @@ function(input, output) {
            theme_void()
        }
      })
-     
      # Comparison chart
      output$comparison_chart <- renderPlot({
        data <- risk_data()
