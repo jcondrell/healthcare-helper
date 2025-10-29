@@ -190,11 +190,11 @@ function(input, output) {
 ##############################################
   
      
-##############################################
-# 4 HEALTH RISK CALCULATOR:
+     ##############################################
+     # 4 HEALTH RISK CALCULATOR:
      
-# Reactive value to store calculation trigger
- risk_data <- eventReactive(input$calculate_risk, {
+     # Reactive value to store calculation trigger
+     risk_data <- eventReactive(input$calculate_risk, {
        
        # Get user inputs
        user_age <- input$input_age
@@ -203,6 +203,30 @@ function(input, output) {
        user_hr <- input$input_hr
        user_chol <- input$input_chol
        user_bmi <- input$input_bmi
+       
+       # Check for extreme values (outside dataset range)
+       extreme_values <- list()
+       
+       if (user_age < min(healthcare_dataset$Age) || user_age > max(healthcare_dataset$Age)) {
+         extreme_values$age <- paste0("Age (", user_age, ") is outside dataset range [", 
+                                      min(healthcare_dataset$Age), "-", max(healthcare_dataset$Age), "]")
+       }
+       if (user_bp < min(healthcare_dataset$Blood_Pressure) || user_bp > max(healthcare_dataset$Blood_Pressure)) {
+         extreme_values$bp <- paste0("Blood Pressure (", user_bp, ") is outside dataset range [", 
+                                     min(healthcare_dataset$Blood_Pressure), "-", max(healthcare_dataset$Blood_Pressure), "]")
+       }
+       if (user_hr < min(healthcare_dataset$Heart_Rate) || user_hr > max(healthcare_dataset$Heart_Rate)) {
+         extreme_values$hr <- paste0("Heart Rate (", user_hr, ") is outside dataset range [", 
+                                     min(healthcare_dataset$Heart_Rate), "-", max(healthcare_dataset$Heart_Rate), "]")
+       }
+       if (user_chol < min(healthcare_dataset$Cholesterol_Level) || user_chol > max(healthcare_dataset$Cholesterol_Level)) {
+         extreme_values$chol <- paste0("Cholesterol (", user_chol, ") is outside dataset range [", 
+                                       min(healthcare_dataset$Cholesterol_Level), "-", max(healthcare_dataset$Cholesterol_Level), "]")
+       }
+       if (user_bmi < min(healthcare_dataset$BMI) || user_bmi > max(healthcare_dataset$BMI)) {
+         extreme_values$bmi <- paste0("BMI (", user_bmi, ") is outside dataset range [", 
+                                      min(healthcare_dataset$BMI), "-", max(healthcare_dataset$BMI), "]")
+       }
        
        # Calculate percentiles
        age_percentile <- round(mean(healthcare_dataset$Age <= user_age) * 100, 1)
@@ -225,8 +249,16 @@ function(input, output) {
        if (user_hr > 100) risk_score <- risk_score + 1
        else if (user_hr < 60) risk_score <- risk_score + 1
        
-       # Determine risk level
-       risk_level <- if (risk_score <= 2) "Low" else if (risk_score <= 4) "Medium" else "High"
+       # Determine risk level (override if extreme values detected)
+       risk_level <- if (length(extreme_values) > 0) {
+         "Potential High Risk"
+       } else if (risk_score <= 2) {
+         "Low"
+       } else if (risk_score <= 4) {
+         "Medium"
+       } else {
+         "High"
+       }
        
        # Find similar patients (within ranges)
        similar_patients <- healthcare_dataset %>%
@@ -271,7 +303,8 @@ function(input, output) {
            hr = user_hr,
            chol = user_chol,
            bmi = user_bmi
-         )
+         ),
+         extreme_values = extreme_values
        )
      })
      
@@ -282,16 +315,35 @@ function(input, output) {
        risk_class <- switch(data$risk_level,
                             "Low" = "risk-low",
                             "Medium" = "risk-medium",
-                            "High" = "risk-high")
+                            "High" = "risk-high",
+                            "Potential High Risk" = "risk-high")
        
        risk_message <- switch(data$risk_level,
                               "Low" = "Your health metrics look good! Keep maintaining healthy habits.",
                               "Medium" = "Some of your metrics are elevated. Consider consulting with a healthcare provider.",
-                              "High" = "Multiple risk factors detected. We recommend consulting with a healthcare provider soon.")
+                              "High" = "Multiple risk factors detected. We recommend consulting with a healthcare provider soon.",
+                              "Potential High Risk" = "One or more of your values is outside our dataset's range. Please consult with a healthcare provider immediately.")
        
-       div(class = paste("risk-box", risk_class),
-           h2(paste("Overall Risk Level:", data$risk_level)),
-           p(risk_message)
+       # Create extreme values warning if any exist
+       extreme_warning <- if (length(data$extreme_values) > 0) {
+         extreme_list <- paste(unlist(data$extreme_values), collapse = "<br/>")
+         HTML(paste0(
+           "<div style='background-color: #ffebee; padding: 15px; margin-top: 15px; border-radius: 5px; border: 2px solid #c62828;'>",
+           "<h4 style='color: #c62828; margin-top: 0;'>⚠️ Extreme Values Detected:</h4>",
+           "<p style='color: #c62828; margin: 0;'><strong>", extreme_list, "</strong></p>",
+           "<p style='margin-top: 10px; margin-bottom: 0; font-size: 14px;'>Your values exceed the range of data in our dataset. This may indicate a serious health concern. Please seek immediate medical attention.</p>",
+           "</div>"
+         ))
+       } else {
+         ""
+       }
+       
+       tagList(
+         div(class = paste("risk-box", risk_class),
+             h2(paste("Overall Risk Level:", data$risk_level)),
+             p(risk_message)
+         ),
+         HTML(extreme_warning)
        )
      })
      
@@ -376,5 +428,7 @@ function(input, output) {
                plot.title = element_text(size = 16, face = "bold"))
      })
      
-     ##############################################     
+##############################################
+     
+     
 } # THIS COVERS THE WHOLE CODE! (connected to function(input,output) around line 16)

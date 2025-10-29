@@ -149,7 +149,7 @@ tabPanel("Health Risk Calculator",
              selectInput("input_gender",
                          "Gender:",
                          choices = c("Male", "Female"),
-                         selected = "Male"),
+                         selected = "Choose gender"),
              
              numericInput("input_bp",
                           "Blood Pressure (systolic):",
@@ -159,7 +159,7 @@ tabPanel("Health Risk Calculator",
                           step = 1),
              
              numericInput("input_hr",
-                          "Heart Rate (bpm):",
+                          "Resting Heart Rate (bpm):",
                           value = 70,
                           min = 40,
                           max = 150,
@@ -208,7 +208,11 @@ tabPanel("Health Risk Calculator",
              
              fluidRow(
                column(12,
-                      h4("Most Common Diagnoses for Similar Profiles:", style = "margin-top: 20px;"),
+                      h4("If Seeking Medical Help: Common Diagnoses for Individuals with Similar Demographics", style = "margin-top: 20px;"),
+                      p("This chart shows the most frequent diagnoses among patients in our dataset with similar characteristics to yours (within ±10 years age, same gender, and ±5 BMI points). The percentages indicate what proportion of these similar patients received each diagnosis.",
+                        style = "color: #666; font-size: 14px; margin-bottom: 10px; line-height: 1.5;"),
+                      p(strong("Important Note:"), " This dataset only includes individuals who sought medical care at healthcare facilities. Many healthy individuals with similar profiles who did not require medical attention are not represented in this data. These percentages should not be interpreted as your likelihood of developing these conditions.",
+                        style = "color: #d32f2f; font-size: 13px; margin-bottom: 15px; line-height: 1.5; background-color: #fff3e0; padding: 10px; border-radius: 5px; border-left: 4px solid #ff9800;"),
                       plotOutput("diagnosis_distribution", height = 300)
                )
              ),
@@ -218,13 +222,14 @@ tabPanel("Health Risk Calculator",
              fluidRow(
                column(12,
                       h4("How You Compare to Dataset Averages:", style = "margin-top: 20px;"),
+                      p("This comparison shows your health metrics (in red) side-by-side with the average values from our entire patient dataset (in blue). This helps you see where your values are higher or lower than typical patients in our database.",
+                        style = "color: #666; font-size: 14px; margin-bottom: 15px; line-height: 1.5;"),
                       plotOutput("comparison_chart", height = 350)
                )
              )
            )
          )
 )
-
 ##############################################
 
 ) # connects to navbarPage at top! must engulf WHOLE THING!
