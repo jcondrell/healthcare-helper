@@ -58,23 +58,23 @@ ui <- navbarPage(
                font-size: 15px;
              }
              .navbar-default .navbar-nav > li:nth-child(2) > a {
-               background-color: #1976d2 !important;
+               background-color: #2C5F8D !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li:nth-child(3) > a {
-               background-color: #d32f2f !important;
+               background-color: #E76F51 !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li:nth-child(4) > a {
-               background-color: #0288d1 !important;
+               background-color: #90E0EF !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li:nth-child(5) > a {
-               background-color: #c62828 !important;
+               background-color: #F77F00 !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li:nth-child(6) > a {
-               background-color: #1565c0 !important;
+               background-color: #A8DADC !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li.active > a {
