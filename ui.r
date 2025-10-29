@@ -117,8 +117,114 @@ ui <- navbarPage(
         plotOutput("pie_chart")
         )
     )
-  )
+  ),
 ##############################################
 
+
+######################################
+# 4 HEALTH RISK CALCULATOR:
+tabPanel("Health Risk Calculator",
+         fluidRow(
+           column(12,
+                  div(style = "text-align: center; padding: 30px 20px;",
+                      h1("Personal Health Risk Assessment", 
+                         style = "font-size: 42px; font-weight: bold; color: #d32f2f; margin-bottom: 20px;"),
+                      p("Enter your health metrics below to see how you compare to our patient dataset and assess potential health risks.",
+                        style = "font-size: 18px; color: #555; margin-bottom: 40px;")
+                  )
+           )
+         ),
+         
+         sidebarLayout(
+           sidebarPanel(
+             h3("Enter Your Health Metrics:", style = "color: #d32f2f;"),
+             
+             numericInput("input_age",
+                          "Age:",
+                          value = 45,
+                          min = 18,
+                          max = 100,
+                          step = 1),
+             
+             selectInput("input_gender",
+                         "Gender:",
+                         choices = c("Male", "Female"),
+                         selected = "Male"),
+             
+             numericInput("input_bp",
+                          "Blood Pressure (systolic):",
+                          value = 120,
+                          min = 80,
+                          max = 200,
+                          step = 1),
+             
+             numericInput("input_hr",
+                          "Heart Rate (bpm):",
+                          value = 70,
+                          min = 40,
+                          max = 150,
+                          step = 1),
+             
+             numericInput("input_chol",
+                          "Cholesterol Level (mg/dL):",
+                          value = 200,
+                          min = 100,
+                          max = 400,
+                          step = 1),
+             
+             numericInput("input_bmi",
+                          "BMI:",
+                          value = 25,
+                          min = 15,
+                          max = 50,
+                          step = 0.1),
+             
+             actionButton("calculate_risk",
+                          "Calculate My Risk Profile",
+                          style = "background-color: #d32f2f; color: white; font-weight: bold; width: 100%; padding: 12px; font-size: 16px;")
+           ),
+           
+           mainPanel(
+             h3("Your Health Risk Profile:", style = "color: #d32f2f; margin-bottom: 20px;"),
+             
+             uiOutput("risk_level_box"),
+             
+             fluidRow(
+               column(6,
+                      div(class = "metric-box",
+                          h4("Your Percentile Rankings:"),
+                          htmlOutput("percentile_rankings")
+                      )
+               ),
+               column(6,
+                      div(class = "metric-box",
+                          h4("Similar Patient Profile:"),
+                          htmlOutput("similar_patients_info")
+                      )
+               )
+             ),
+             
+             br(),
+             
+             fluidRow(
+               column(12,
+                      h4("Most Common Diagnoses for Similar Profiles:", style = "margin-top: 20px;"),
+                      plotOutput("diagnosis_distribution", height = 300)
+               )
+             ),
+             
+             br(),
+             
+             fluidRow(
+               column(12,
+                      h4("How You Compare to Dataset Averages:", style = "margin-top: 20px;"),
+                      plotOutput("comparison_chart", height = 350)
+               )
+             )
+           )
+         )
+)
+
+##############################################
 
 ) # connects to navbarPage at top! must engulf WHOLE THING!

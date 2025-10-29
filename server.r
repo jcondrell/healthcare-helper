@@ -189,4 +189,192 @@ function(input, output) {
 
 ##############################################
   
+     
+##############################################
+# 4 HEALTH RISK CALCULATOR:
+     
+# Reactive value to store calculation trigger
+ risk_data <- eventReactive(input$calculate_risk, {
+       
+       # Get user inputs
+       user_age <- input$input_age
+       user_gender <- input$input_gender
+       user_bp <- input$input_bp
+       user_hr <- input$input_hr
+       user_chol <- input$input_chol
+       user_bmi <- input$input_bmi
+       
+       # Calculate percentiles
+       age_percentile <- round(mean(healthcare_dataset$Age <= user_age) * 100, 1)
+       bp_percentile <- round(mean(healthcare_dataset$Blood_Pressure <= user_bp) * 100, 1)
+       hr_percentile <- round(mean(healthcare_dataset$Heart_Rate <= user_hr) * 100, 1)
+       chol_percentile <- round(mean(healthcare_dataset$Cholesterol_Level <= user_chol) * 100, 1)
+       bmi_percentile <- round(mean(healthcare_dataset$BMI <= user_bmi) * 100, 1)
+       
+       # Calculate risk score (higher is worse)
+       risk_score <- 0
+       if (user_bp > 140) risk_score <- risk_score + 2
+       else if (user_bp > 120) risk_score <- risk_score + 1
+       
+       if (user_chol > 240) risk_score <- risk_score + 2
+       else if (user_chol > 200) risk_score <- risk_score + 1
+       
+       if (user_bmi > 30) risk_score <- risk_score + 2
+       else if (user_bmi > 25) risk_score <- risk_score + 1
+       
+       if (user_hr > 100) risk_score <- risk_score + 1
+       else if (user_hr < 60) risk_score <- risk_score + 1
+       
+       # Determine risk level
+       risk_level <- if (risk_score <= 2) "Low" else if (risk_score <= 4) "Medium" else "High"
+       
+       # Find similar patients (within ranges)
+       similar_patients <- healthcare_dataset %>%
+         filter(
+           abs(Age - user_age) <= 10,
+           Gender == user_gender,
+           abs(BMI - user_bmi) <= 5
+         )
+       
+       # Get diagnosis distribution for similar patients
+       diagnosis_counts <- similar_patients %>%
+         count(Diagnosis) %>%
+         arrange(desc(n)) %>%
+         mutate(percentage = round(n / sum(n) * 100, 1))
+       
+       # Calculate averages
+       dataset_avg <- healthcare_dataset %>%
+         summarise(
+           avg_age = mean(Age, na.rm = TRUE),
+           avg_bp = mean(Blood_Pressure, na.rm = TRUE),
+           avg_hr = mean(Heart_Rate, na.rm = TRUE),
+           avg_chol = mean(Cholesterol_Level, na.rm = TRUE),
+           avg_bmi = mean(BMI, na.rm = TRUE)
+         )
+       
+       list(
+         percentiles = list(
+           age = age_percentile,
+           bp = bp_percentile,
+           hr = hr_percentile,
+           chol = chol_percentile,
+           bmi = bmi_percentile
+         ),
+         risk_level = risk_level,
+         risk_score = risk_score,
+         similar_count = nrow(similar_patients),
+         diagnosis_counts = diagnosis_counts,
+         dataset_avg = dataset_avg,
+         user_values = list(
+           age = user_age,
+           bp = user_bp,
+           hr = user_hr,
+           chol = user_chol,
+           bmi = user_bmi
+         )
+       )
+     })
+     
+     # Risk level box
+     output$risk_level_box <- renderUI({
+       data <- risk_data()
+       
+       risk_class <- switch(data$risk_level,
+                            "Low" = "risk-low",
+                            "Medium" = "risk-medium",
+                            "High" = "risk-high")
+       
+       risk_message <- switch(data$risk_level,
+                              "Low" = "Your health metrics look good! Keep maintaining healthy habits.",
+                              "Medium" = "Some of your metrics are elevated. Consider consulting with a healthcare provider.",
+                              "High" = "Multiple risk factors detected. We recommend consulting with a healthcare provider soon.")
+       
+       div(class = paste("risk-box", risk_class),
+           h2(paste("Overall Risk Level:", data$risk_level)),
+           p(risk_message)
+       )
+     })
+     
+     # Percentile rankings
+     output$percentile_rankings <- renderUI({
+       data <- risk_data()
+       
+       HTML(paste0(
+         "<p><strong>Age:</strong> <span class='percentile-text'>", data$percentiles$age, "th</span> percentile</p>",
+         "<p><strong>Blood Pressure:</strong> <span class='percentile-text'>", data$percentiles$bp, "th</span> percentile</p>",
+         "<p><strong>Heart Rate:</strong> <span class='percentile-text'>", data$percentiles$hr, "th</span> percentile</p>",
+         "<p><strong>Cholesterol:</strong> <span class='percentile-text'>", data$percentiles$chol, "th</span> percentile</p>",
+         "<p><strong>BMI:</strong> <span class='percentile-text'>", data$percentiles$bmi, "th</span> percentile</p>"
+       ))
+     })
+     
+     # Similar patients info
+     output$similar_patients_info <- renderUI({
+       data <- risk_data()
+       
+       if (data$similar_count > 0) {
+         HTML(paste0(
+           "<p><strong>Similar Patients Found:</strong> ", data$similar_count, "</p>",
+           "<p>Patients with similar age, gender, and BMI profiles in our dataset.</p>",
+           "<p style='font-size: 14px; color: #666; margin-top: 10px;'>",
+           "This helps us understand common diagnoses for people with your profile.</p>"
+         ))
+       } else {
+         HTML("<p>No closely matching patient profiles found in dataset.</p>")
+       }
+     })
+     
+     # Diagnosis distribution chart
+     output$diagnosis_distribution <- renderPlot({
+       data <- risk_data()
+       
+       if (nrow(data$diagnosis_counts) > 0) {
+         ggplot(data$diagnosis_counts, aes(x = reorder(Diagnosis, -n), y = n, fill = Diagnosis)) +
+           geom_col() +
+           geom_text(aes(label = paste0(percentage, "%")), vjust = -0.5, fontface = "bold") +
+           labs(title = "Common Diagnoses for Similar Patient Profiles",
+                x = "Diagnosis",
+                y = "Number of Patients") +
+           theme_minimal() +
+           theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
+                 legend.position = "none",
+                 plot.title = element_text(size = 16, face = "bold"))
+       } else {
+         ggplot() +
+           annotate("text", x = 0.5, y = 0.5, label = "Insufficient data for similar profiles", size = 6) +
+           theme_void()
+       }
+     })
+     
+     # Comparison chart
+     output$comparison_chart <- renderPlot({
+       data <- risk_data()
+       
+       comparison_data <- data.frame(
+         Metric = c("Blood Pressure", "Heart Rate", "Cholesterol", "BMI"),
+         Your_Value = c(data$user_values$bp, data$user_values$hr, 
+                        data$user_values$chol, data$user_values$bmi),
+         Dataset_Average = c(data$dataset_avg$avg_bp, data$dataset_avg$avg_hr,
+                             data$dataset_avg$avg_chol, data$dataset_avg$avg_bmi)
+       ) %>%
+         pivot_longer(cols = c(Your_Value, Dataset_Average), 
+                      names_to = "Type", 
+                      values_to = "Value")
+       
+       ggplot(comparison_data, aes(x = Metric, y = Value, fill = Type)) +
+         geom_col(position = "dodge", width = 0.7) +
+         scale_fill_manual(values = c("Your_Value" = "#d32f2f", "Dataset_Average" = "#1976d2"),
+                           labels = c("Dataset Average", "Your Value")) +
+         labs(title = "Your Health Metrics vs. Dataset Averages",
+              x = "",
+              y = "Value",
+              fill = "") +
+         theme_minimal() +
+         theme(axis.text.x = element_text(size = 12, face = "bold"),
+               legend.position = "top",
+               legend.text = element_text(size = 12),
+               plot.title = element_text(size = 16, face = "bold"))
+     })
+     
+     ##############################################     
 } # THIS COVERS THE WHOLE CODE! (connected to function(input,output) around line 16)
