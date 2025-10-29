@@ -215,9 +215,9 @@ function(input, output) {
          extreme_values$bp <- paste0("Blood Pressure (", user_bp, ") is outside dataset range [", 
                                      min(healthcare_dataset$Blood_Pressure), "-", max(healthcare_dataset$Blood_Pressure), "]")
        }
-       if (user_hr < min(healthcare_dataset$Heart_Rate) || user_hr > max(healthcare_dataset$Heart_Rate)) {
-         extreme_values$hr <- paste0("Heart Rate (", user_hr, ") is outside dataset range [", 
-                                     min(healthcare_dataset$Heart_Rate), "-", max(healthcare_dataset$Heart_Rate), "]")
+       # Only flag heart rate as extreme if above 130 (not just above dataset max)
+       if (user_hr < min(healthcare_dataset$Heart_Rate) || user_hr >= 130) {
+         extreme_values$hr <- paste0("Heart Rate (", user_hr, ") is outside safe range")
        }
        if (user_chol < min(healthcare_dataset$Cholesterol_Level) || user_chol > max(healthcare_dataset$Cholesterol_Level)) {
          extreme_values$chol <- paste0("Cholesterol (", user_chol, ") is outside dataset range [", 
@@ -237,24 +237,34 @@ function(input, output) {
        
        # Calculate risk score (higher is worse)
        risk_score <- 0
+       
+       # Blood Pressure scoring
        if (user_bp > 140) risk_score <- risk_score + 2
        else if (user_bp > 120) risk_score <- risk_score + 1
        
+       # Cholesterol scoring
        if (user_chol > 240) risk_score <- risk_score + 2
        else if (user_chol > 200) risk_score <- risk_score + 1
        
+       # BMI scoring
        if (user_bmi > 30) risk_score <- risk_score + 2
        else if (user_bmi > 25) risk_score <- risk_score + 1
        
-       if (user_hr > 100) risk_score <- risk_score + 1
+       # Heart Rate scoring (hardcoded thresholds)
+       if (user_hr > 120) risk_score <- risk_score + 2
+       else if (user_hr >= 100) risk_score <- risk_score + 1
        else if (user_hr < 60) risk_score <- risk_score + 1
+       
+       # Age scoring (cardiovascular risk increases with age)
+       if (user_age >= 65) risk_score <- risk_score + 2
+       else if (user_age >= 50) risk_score <- risk_score + 1
        
        # Determine risk level (override if extreme values detected)
        risk_level <- if (length(extreme_values) > 0) {
          "Potential High Risk"
        } else if (risk_score <= 2) {
          "Low"
-       } else if (risk_score <= 4) {
+       } else if (risk_score == 4) {
          "Medium"
        } else {
          "High"
@@ -340,7 +350,7 @@ function(input, output) {
        
        tagList(
          div(class = paste("risk-box", risk_class),
-             h2(paste("Overall Risk Level:", data$risk_level)),
+             h2(strong(paste("Overall Risk Level:", data$risk_level))),
              p(risk_message)
          ),
          HTML(extreme_warning)
@@ -351,12 +361,26 @@ function(input, output) {
      output$percentile_rankings <- renderUI({
        data <- risk_data()
        
+       # Function to color code percentiles if extreme
+       make_percentile_text <- function(name, percentile, is_extreme) {
+         color <- if (is_extreme) "#c62828" else "#d32f2f"
+         background <- if (is_extreme) "#ffebee" else "transparent"
+         style_extra <- if (is_extreme) "font-weight: bold; padding: 5px; border-radius: 3px;" else ""
+         
+         paste0("<p style='background-color: ", background, "; ", style_extra, "'>",
+                "<strong style='font-weight: bold;'>", name, ":</strong> ",
+                "<span class='percentile-text' style='color: ", color, "; font-weight: bold;'>", 
+                percentile, "th</span> percentile",
+                if (is_extreme) " <span style='color: #c62828; font-weight: bold;'>⚠️ EXTREME</span>" else "",
+                "</p>")
+       }
+       
        HTML(paste0(
-         "<p><strong>Age:</strong> <span class='percentile-text'>", data$percentiles$age, "th</span> percentile</p>",
-         "<p><strong>Blood Pressure:</strong> <span class='percentile-text'>", data$percentiles$bp, "th</span> percentile</p>",
-         "<p><strong>Heart Rate:</strong> <span class='percentile-text'>", data$percentiles$hr, "th</span> percentile</p>",
-         "<p><strong>Cholesterol:</strong> <span class='percentile-text'>", data$percentiles$chol, "th</span> percentile</p>",
-         "<p><strong>BMI:</strong> <span class='percentile-text'>", data$percentiles$bmi, "th</span> percentile</p>"
+         make_percentile_text("Age", data$percentiles$age, !is.null(data$extreme_values$age)),
+         make_percentile_text("Blood Pressure", data$percentiles$bp, !is.null(data$extreme_values$bp)),
+         make_percentile_text("Heart Rate", data$percentiles$hr, !is.null(data$extreme_values$hr)),
+         make_percentile_text("Cholesterol", data$percentiles$chol, !is.null(data$extreme_values$chol)),
+         make_percentile_text("BMI", data$percentiles$bmi, !is.null(data$extreme_values$bmi))
        ))
      })
      
@@ -384,13 +408,13 @@ function(input, output) {
          ggplot(data$diagnosis_counts, aes(x = reorder(Diagnosis, -n), y = n, fill = Diagnosis)) +
            geom_col() +
            geom_text(aes(label = paste0(percentage, "%")), vjust = -0.5, fontface = "bold") +
-           labs(title = "Common Diagnoses for Similar Patient Profiles",
-                x = "Diagnosis",
+           labs(x = "Diagnosis",
                 y = "Number of Patients") +
+           scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
            theme_minimal() +
            theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
                  legend.position = "none",
-                 plot.title = element_text(size = 16, face = "bold"))
+                 plot.margin = margin(t = 20, r = 20, b = 20, l = 20))
        } else {
          ggplot() +
            annotate("text", x = 0.5, y = 0.5, label = "Insufficient data for similar profiles", size = 6) +
@@ -415,20 +439,24 @@ function(input, output) {
        
        ggplot(comparison_data, aes(x = Metric, y = Value, fill = Type)) +
          geom_col(position = "dodge", width = 0.7) +
+         geom_text(aes(label = round(Value, 1)), 
+                   position = position_dodge(width = 0.7), 
+                   vjust = -0.5, 
+                   fontface = "bold",
+                   size = 4) +
+         scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
          scale_fill_manual(values = c("Your_Value" = "#d32f2f", "Dataset_Average" = "#1976d2"),
                            labels = c("Dataset Average", "Your Value")) +
-         labs(title = "Your Health Metrics vs. Dataset Averages",
-              x = "",
+         labs(x = "",
               y = "Value",
               fill = "") +
          theme_minimal() +
          theme(axis.text.x = element_text(size = 12, face = "bold"),
                legend.position = "top",
                legend.text = element_text(size = 12),
-               plot.title = element_text(size = 16, face = "bold"))
+               plot.margin = margin(t = 20, r = 20, b = 20, l = 20))
      })
      
-##############################################
-     
+     ##############################################
      
 } # THIS COVERS THE WHOLE CODE! (connected to function(input,output) around line 16)
