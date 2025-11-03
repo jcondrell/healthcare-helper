@@ -468,4 +468,180 @@ function(input, output) {
      
      ##############################################
      
+     
+     ######################################
+     # 4 TREATMENT PATHWAYS DASHBOARD:
+     
+     # Treatment pie chart
+     output$treatment_pie <- renderPlot({
+       
+       # Check what the actual column name is
+       treatment_col <- names(healthcare_dataset)[grep("treatment", names(healthcare_dataset), ignore.case = TRUE)]
+       
+       # Filter data based on selected diagnosis
+       plot_data <- if (input$treatment_diagnosis == "All Diagnoses") {
+         healthcare_dataset
+       } else {
+         healthcare_dataset %>% filter(Diagnosis == input$treatment_diagnosis)
+       }
+       
+       # Filter by selected treatment types
+       plot_data <- plot_data %>%
+         filter(.data[[treatment_col]] %in% input$treatment_types)
+       
+       if (nrow(plot_data) == 0) {
+         ggplot() +
+           annotate("text", x = 0.5, y = 0.5, 
+                    label = "No data matches your filters 🤷", 
+                    size = 5, color = "#6b7280") +
+           theme_void()
+       } else {
+         # Calculate percentages
+         treatment_summary <- plot_data %>%
+           count(.data[[treatment_col]]) %>%
+           rename(Treatment = 1) %>%
+           mutate(percentage = n / sum(n) * 100,
+                  label = paste0(round(percentage, 1), "%"))
+         
+         # Define treatment colors
+         treatment_colors <- c(
+           "Surgery" = "#ef4444",
+           "Medication" = "#3b82f6",
+           "Lifestyle Changes" = "#10b981",
+           "Observation" = "#f59e0b",
+           "None" = "#9ca3af"
+         )
+         
+         ggplot(treatment_summary, aes(x = "", y = n, fill = Treatment)) +
+           geom_bar(stat = "identity", width = 1) +
+           coord_polar("y", start = 0) +
+           geom_text(aes(label = label), 
+                     position = position_stack(vjust = 0.5),
+                     color = "white",
+                     fontface = "bold",
+                     size = 5) +
+           scale_fill_manual(values = treatment_colors) +
+           labs(fill = "") +
+           theme_void() +
+           theme(legend.position = "bottom",
+                 legend.text = element_text(size = 12),
+                 plot.margin = margin(10, 10, 10, 10))
+       }
+     })
+     
+     # Treatment statistics
+     output$treatment_stats <- renderUI({
+       
+       treatment_col <- names(healthcare_dataset)[grep("treatment", names(healthcare_dataset), ignore.case = TRUE)]
+       
+       plot_data <- if (input$treatment_diagnosis == "All Diagnoses") {
+         healthcare_dataset
+       } else {
+         healthcare_dataset %>% filter(Diagnosis == input$treatment_diagnosis)
+       }
+       
+       plot_data <- plot_data %>%
+         filter(.data[[treatment_col]] %in% input$treatment_types)
+       
+       if (nrow(plot_data) == 0) {
+         HTML("<p style='color: #6b7280; text-align: center; padding: 40px;'>
+          <span style='font-size: 48px;'>📭</span><br>
+          No data available<br>
+          <small>Try changing your filters</small></p>")
+       } else {
+         total_patients <- nrow(plot_data)
+         most_common <- plot_data %>%
+           count(.data[[treatment_col]]) %>%
+           arrange(desc(n)) %>%
+           slice(1) %>%
+           rename(Treatment = 1)
+         
+         # Color for most common treatment
+         treatment_emoji <- case_when(
+           most_common$Treatment == "Surgery" ~ "🔴",
+           most_common$Treatment == "Medication" ~ "🔵",
+           most_common$Treatment == "Lifestyle Changes" ~ "🟢",
+           most_common$Treatment == "Observation" ~ "🟠",
+           most_common$Treatment == "None" ~ "⚪",
+           TRUE ~ "💊"
+         )
+         
+         HTML(paste0(
+           "<div style='padding: 20px; text-align: center;'>",
+           "<div style='font-size: 56px; margin-bottom: 10px;'>", treatment_emoji, "</div>",
+           "<div style='font-size: 32px; font-weight: bold; color: #10b981; margin-bottom: 15px;'>", 
+           format(total_patients, big.mark = ","), "</div>",
+           "<div style='color: #6b7280; font-size: 14px; margin-bottom: 20px;'>Total Patients</div>",
+           "<div style='background: #f0fdf4; padding: 15px; border-radius: 8px; text-align: left;'>",
+           "<div style='color: #374151; font-weight: 500; margin-bottom: 5px;'>Most Common:</div>",
+           "<div style='color: #10b981; font-size: 18px; font-weight: bold;'>", 
+           most_common$Treatment, "</div>",
+           "<div style='color: #6b7280; font-size: 14px;'>", 
+           round(most_common$n / total_patients * 100, 1), "% of cases</div>",
+           "</div>",
+           "</div>"
+         ))
+       }
+     })
+     
+     # Treatment demographics comparison
+     output$treatment_demographics <- renderPlot({
+       
+       treatment_col <- names(healthcare_dataset)[grep("treatment", names(healthcare_dataset), ignore.case = TRUE)]
+       
+       plot_data <- if (input$treatment_diagnosis == "All Diagnoses") {
+         healthcare_dataset
+       } else {
+         healthcare_dataset %>% filter(Diagnosis == input$treatment_diagnosis)
+       }
+       
+       plot_data <- plot_data %>%
+         filter(.data[[treatment_col]] %in% input$treatment_types)
+       
+       if (nrow(plot_data) == 0) {
+         ggplot() +
+           annotate("text", x = 0.5, y = 0.5, 
+                    label = "No data matches your filters 🤷", 
+                    size = 5, color = "#6b7280") +
+           theme_void()
+       } else {
+         # Calculate average metrics by treatment
+         avg_metrics <- plot_data %>%
+           group_by(.data[[treatment_col]]) %>%
+           summarise(
+             Age = mean(Age, na.rm = TRUE),
+             `Blood Pressure` = mean(Blood_Pressure, na.rm = TRUE),
+             `Heart Rate` = mean(Heart_Rate, na.rm = TRUE),
+             BMI = mean(BMI, na.rm = TRUE)
+           ) %>%
+           rename(Treatment = 1) %>%
+           pivot_longer(cols = -Treatment, 
+                        names_to = "Metric", 
+                        values_to = "Value")
+         
+         ggplot(avg_metrics, aes(x = Metric, y = Value, fill = Treatment)) +
+           geom_col(position = "dodge", width = 0.7, alpha = 0.9) +
+           scale_fill_manual(values = c(
+             "Surgery" = "#ef4444",
+             "Medication" = "#3b82f6",
+             "Lifestyle Changes" = "#10b981",
+             "Observation" = "#f59e0b",
+             "None" = "#9ca3af"
+           )) +
+           labs(x = "", y = "Average Value", fill = "") +
+           theme_minimal() +
+           theme(axis.text.x = element_text(size = 11),
+                 axis.text.y = element_text(size = 10),
+                 legend.position = "bottom",
+                 legend.text = element_text(size = 11),
+                 panel.grid.minor = element_blank(),
+                 plot.margin = margin(10, 10, 10, 10))
+       }
+     })
+     
+    
+     
+     
+     
+     ##############################################
 } # THIS COVERS THE WHOLE CODE! (connected to function(input,output) around line 16)

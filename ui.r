@@ -1,4 +1,3 @@
-
 # Libraries:
 library(shiny)
 library(tidyverse)
@@ -37,6 +36,13 @@ ui <- navbarPage(
                border-radius: 8px;
                border-left: 4px solid #d32f2f;
              }
+             .treatment-box {
+               background-color: #f5f5f5;
+               padding: 15px;
+               margin: 10px 0;
+               border-radius: 8px;
+               border-left: 4px solid #10b981;
+             }
              .percentile-text {
                font-size: 24px;
                font-weight: bold;
@@ -73,6 +79,11 @@ ui <- navbarPage(
              /* Specialty Distribution Analysis - Pink */
              .navbar-default .navbar-nav > li > a[data-value='Specialty Distribution Analysis'] {
                background-color: #ec407a !important;
+               color: white !important;
+             }
+             /* Treatment Pathways - Emerald Green */
+             .navbar-default .navbar-nav > li > a[data-value='Treatment Pathways'] {
+               background-color: #10b981 !important;
                color: white !important;
              }
              /* Health Risk Calculator - Dark Red */
@@ -129,7 +140,7 @@ ui <- navbarPage(
                       h2("What Can You Do?", style = "text-align: center; font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 50px;"),
                       
                       tags$div(style = "display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;",
-                               # Feature Card 1 - Specialty Geographic Distribution (Deep Blue to match tab)
+                               # Feature Card 1 - Specialty Geographic Distribution
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(30,136,229,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🗺️"),
@@ -138,7 +149,7 @@ ui <- navbarPage(
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 2 - Specialty State Rankings (Coral/Orange to match tab)
+                               # Feature Card 2 - Specialty State Rankings
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #ff6f61 0%, #e85d4f 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(255,111,97,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "📊"),
@@ -147,7 +158,7 @@ ui <- navbarPage(
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 3 - Specialty Distribution Analysis (Pink to match tab)
+                               # Feature Card 3 - Specialty Distribution Analysis
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(236,64,122,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🥧"),
@@ -156,7 +167,16 @@ ui <- navbarPage(
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 4 - Health Risk Calculator (Dark Red to match tab)
+                               # Feature Card 4 - Treatment Pathways (NEW!)
+                               tags$div(class = "feature-card",
+                                        style = "background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(16,185,129,0.3); color: white;",
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "💊"),
+                                        h3("Treatment Pathways", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
+                                        p("Explore treatment options and patterns for different diagnoses with comprehensive data analysis.",
+                                          style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
+                               ),
+                               
+                               # Feature Card 5 - Health Risk Calculator
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(211,47,47,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "❤️"),
@@ -171,15 +191,15 @@ ui <- navbarPage(
              tags$div(style = "background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 60px 20px; margin-top: 60px;",
                       tags$div(style = "max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;",
                                tags$div(
-                                 h3("50+", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
+                                 h3("51", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
                                  p("States & Territories", style = "color: rgba(255,255,255,0.9); font-size: 18px;")
                                ),
                                tags$div(
-                                 h3("10,000+", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
+                                 h3("500", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
                                  p("Patient Records", style = "color: rgba(255,255,255,0.9); font-size: 18px;")
                                ),
                                tags$div(
-                                 h3("15+", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
+                                 h3("8", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
                                  p("Medical Specialties", style = "color: rgba(255,255,255,0.9); font-size: 18px;")
                                )
                       )
@@ -223,7 +243,6 @@ ui <- navbarPage(
   
   
   
-  
   ################################
   # 1 CHLOROPLETH:
   tabPanel("Specialty Geographic Distribution",
@@ -264,7 +283,6 @@ ui <- navbarPage(
                )
              ),
              
-             # this makes the heading within the tab:
              mainPanel(
                h3("Understanding Specialty Distribution"),
                p("This chart can help you find the top 10 states with the most physicians in your selected specialty. 
@@ -287,7 +305,7 @@ ui <- navbarPage(
                            "Select a State:",
                            choices = unique(specialtyByState$Location),
                            selected = unique(specialtyByState$Location)[1]),
-               h4(textOutput("total_physicians")), # this will give the information on the total number of physcians in that selected state
+               h4(textOutput("total_physicians"))
              ),
              
              mainPanel(
@@ -303,7 +321,76 @@ ui <- navbarPage(
   
   
   ######################################
-  # 4 HEALTH RISK CALCULATOR:
+  # 4 TREATMENT PATHWAYS - NEW TAB!
+  tabPanel("Treatment Pathways",
+           # Hero section with relaxed vibe
+           tags$div(style = "background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 50px 20px; text-align: center; color: white;",
+                    h1("Treatment Pathways Explorer", 
+                       style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
+                    p("Discover how different diagnoses are treated and explore patient care patterns",
+                      style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
+           ),
+           
+           # Main content with tabs-within-tab for organization
+           tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
+                    
+                    # Filter section
+                    fluidRow(
+                      column(3,
+                             tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);",
+                                      h4("🔍 Explore By:", style = "color: #10b981; margin-bottom: 20px;"),
+                                      
+                                      selectInput("treatment_diagnosis",
+                                                  "Diagnosis:",
+                                                  choices = c("All Diagnoses", unique(healthcare_dataset$Diagnosis)),
+                                                  selected = "All Diagnoses"),
+                                      
+                                      hr(style = "border-color: #e5e7eb;"),
+                                      
+                                      checkboxGroupInput("treatment_types",
+                                                         "Show Treatments:",
+                                                         choices = c("Surgery", "Medication", "Lifestyle Changes", "Observation", "None"),
+                                                         selected = c("Surgery", "Medication", "Lifestyle Changes", "Observation", "None")),
+                                      
+                                      tags$div(style = "background: #f0fdf4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #10b981;",
+                                               h5("💡 Quick Guide:", style = "color: #059669; margin-top: 0;"),
+                                               p(style = "font-size: 12px; color: #374151; margin: 5px 0; line-height: 1.6;",
+                                                 "🔴 Surgery - Procedures", br(),
+                                                 "🔵 Medication - Drugs", br(),
+                                                 "🟢 Lifestyle - Diet/Exercise", br(),
+                                                 "🟠 Observation - Monitoring", br(),
+                                                 "⚪ None - No treatment")
+                                      )
+                             )
+                      ),
+                      
+                      # Main visualizations
+                      column(9,
+                             # Top row - Overview cards
+                             fluidRow(
+                               column(6,
+                                      tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;",
+                                               h4("📊 Treatment Breakdown", style = "color: #374151; margin-bottom: 15px;"),
+                                               plotOutput("treatment_pie", height = 280)
+                                      )
+                               ),
+                               column(6,
+                                      tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;",
+                                               h4("📈 Quick Stats", style = "color: #374151; margin-bottom: 15px;"),
+                                               htmlOutput("treatment_stats")
+                                      )
+                               )
+                             ),
+                          
+                      )
+                    )
+           )
+  ),
+  ##############################################
+  
+  
+  ######################################
+  # 5 HEALTH RISK CALCULATOR:
   tabPanel("Health Risk Calculator",
            fluidRow(
              column(12,
