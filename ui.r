@@ -1,3 +1,4 @@
+
 # Libraries:
 library(shiny)
 library(tidyverse)
@@ -49,29 +50,34 @@ ui <- navbarPage(
                border-radius: 5px;
                margin-bottom: 15px;
              }
-             /* Tab styling - matching feature card colors */
+             /* Tab styling - Medical color palette */
              .navbar-default .navbar-nav > li > a {
                font-weight: bold;
                font-size: 15px;
              }
-             /* Specialty Geographic Distribution - Blue */
-             .navbar-default .navbar-nav > li:nth-child(2) > a {
-               background-color: #2C5F8D !important;
+             /* Home tab - No special color (default) */
+             .navbar-default .navbar-nav > li > a[data-value='Home'] {
+               background-color: transparent !important;
+               color: inherit !important;
+             }
+             /* Specialty Geographic Distribution - Deep Blue */
+             .navbar-default .navbar-nav > li > a[data-value='Specialty Geographic Distribution'] {
+               background-color: #1e88e5 !important;
                color: white !important;
              }
-             /* Specialty State Rankings - Coral */
-             .navbar-default .navbar-nav > li:nth-child(3) > a {
-               background-color: #E76F51 !important;
+             /* Specialty State Rankings - Coral/Orange */
+             .navbar-default .navbar-nav > li > a[data-value='Specialty State Rankings'] {
+               background-color: #ff6f61 !important;
                color: white !important;
              }
-             /* Specialty Distribution Analysis - Light Blue */
-             .navbar-default .navbar-nav > li:nth-child(4) > a {
-               background-color: #90E0EF !important;
+             /* Specialty Distribution Analysis - Pink */
+             .navbar-default .navbar-nav > li > a[data-value='Specialty Distribution Analysis'] {
+               background-color: #ec407a !important;
                color: white !important;
              }
-             /* Health Risk Calculator - Orange */
-             .navbar-default .navbar-nav > li:nth-child(5) > a {
-               background-color: #F77F00 !important;
+             /* Health Risk Calculator - Dark Red */
+             .navbar-default .navbar-nav > li > a[data-value='Health Risk Calculator'] {
+               background-color: #d32f2f !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li.active > a {
@@ -123,36 +129,36 @@ ui <- navbarPage(
                       h2("What Can You Do?", style = "text-align: center; font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 50px;"),
                       
                       tags$div(style = "display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;",
-                               # Feature Card 1 - Specialty Geographic Distribution
+                               # Feature Card 1 - Specialty Geographic Distribution (Deep Blue to match tab)
                                tags$div(class = "feature-card",
-                                        style = "background: linear-gradient(135deg, #2C5F8D 0%, #1a3a5c 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(44,95,141,0.3); color: white;",
+                                        style = "background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(30,136,229,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🗺️"),
                                         h3("Specialty Geographic Distribution", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Discover geographic distribution of medical specialties across the United States with interactive visualizations.",
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 2 - Specialty State Rankings
+                               # Feature Card 2 - Specialty State Rankings (Coral/Orange to match tab)
                                tags$div(class = "feature-card",
-                                        style = "background: linear-gradient(135deg, #E76F51 0%, #c94d31 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(231,111,81,0.3); color: white;",
+                                        style = "background: linear-gradient(135deg, #ff6f61 0%, #e85d4f 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(255,111,97,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "📊"),
                                         h3("Specialty State Rankings", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Compare states to find where your desired medical specialty is most prominent and accessible.",
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 3 - Specialty Distribution Analysis
+                               # Feature Card 3 - Specialty Distribution Analysis (Pink to match tab)
                                tags$div(class = "feature-card",
-                                        style = "background: linear-gradient(135deg, #90E0EF 0%, #5ab9d4 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(144,224,239,0.3); color: white;",
+                                        style = "background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(236,64,122,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🥧"),
                                         h3("Specialty Distribution Analysis", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Analyze specialty distribution within each state to understand local healthcare landscapes.",
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 4 - Health Risk Calculator
+                               # Feature Card 4 - Health Risk Calculator (Dark Red to match tab)
                                tags$div(class = "feature-card",
-                                        style = "background: linear-gradient(135deg, #F77F00 0%, #c96600 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(247,127,0,0.3); color: white;",
+                                        style = "background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(211,47,47,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "❤️"),
                                         h3("Health Risk Calculator", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Get personalized health risk assessments based on your metrics and compare with similar patient profiles.",
@@ -214,6 +220,7 @@ ui <- navbarPage(
              "))
            )
   ),
+  
   
   
   
