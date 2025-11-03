@@ -1,21 +1,18 @@
 # Libraries:
-library(shiny)   # shiny comes with the sidebar page ... ui defines where outputs and inputs are on the webpage
+library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(leaflet)
 
-
 # Importing all csv datasets: 
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
-specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE) # for histogram
-specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE) # for pie chart (includes all specialties and "other" column in state_facts)
-
+specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE)
 
 # BEGINNING OF MAIN SHINY CODES:
 ui <- navbarPage(
   title = tags$span(style = "font-weight: bold; color: red;", tags$em("Healthcare Helper"), tags$sup("™")),
   
-  # Really wanted to change all the fonts to Times New Roman... :
   tags$head(
     tags$style(HTML("
             body {
@@ -52,29 +49,29 @@ ui <- navbarPage(
                border-radius: 5px;
                margin-bottom: 15px;
              }
-             /* Tab styling */
+             /* Tab styling - matching feature card colors */
              .navbar-default .navbar-nav > li > a {
                font-weight: bold;
                font-size: 15px;
              }
+             /* Specialty Geographic Distribution - Blue */
              .navbar-default .navbar-nav > li:nth-child(2) > a {
                background-color: #2C5F8D !important;
                color: white !important;
              }
+             /* Specialty State Rankings - Coral */
              .navbar-default .navbar-nav > li:nth-child(3) > a {
                background-color: #E76F51 !important;
                color: white !important;
              }
+             /* Specialty Distribution Analysis - Light Blue */
              .navbar-default .navbar-nav > li:nth-child(4) > a {
                background-color: #90E0EF !important;
                color: white !important;
              }
+             /* Health Risk Calculator - Orange */
              .navbar-default .navbar-nav > li:nth-child(5) > a {
                background-color: #F77F00 !important;
-               color: white !important;
-             }
-             .navbar-default .navbar-nav > li:nth-child(6) > a {
-               background-color: #A8DADC !important;
                color: white !important;
              }
              .navbar-default .navbar-nav > li.active > a {
@@ -85,22 +82,136 @@ ui <- navbarPage(
                display: block !important;
                font-family: 'Times New Roman', Times, serif !important;
              }
+             
+             /* Hover effect for feature cards */
+             .feature-card {
+               transition: transform 0.3s ease, box-shadow 0.3s ease;
+             }
+             .feature-card:hover {
+               transform: translateY(-5px);
+             }
           "))
   ),
   
-  
-  # Creating the tabs and the main header page:
+  # HOME TAB
   tabPanel("Home",
-           tags$div(style = "text-align: center; padding: 60px 20px;",
-                    h1(tags$span("Welcome to the ", tags$em("Healthcare Helper"), " App!"), #all this extra stuff is it italicizing it
-                       style = "font-size: 56px; font-weight: bold; color: #d32f2f; margin-bottom: 40px;"),
-                    p("We are here to help you find accessible healthcare data to better help you assess your healthcare needs and options!",
-                      style = "font-size: 28px; line-height: 1.6; max-width: 900px; margin: 0 auto 50px;"),
-                    
-                    # Add image
-                    tags$img(src = "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
-                             alt = "Medical stethoscope",
-                             style = "width: 100%; max-width: 600px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);")
+           tags$div(
+             # Hero Section
+             tags$div(style = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 20px; text-align: center; color: white; position: relative; overflow: hidden;",
+                      # Animated background bubbles
+                      tags$div(style = "position: absolute; top: 20%; left: 10%; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 6s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 60%; right: 15%; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 8s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 30%; right: 20%; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%; animation: float 7s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 70%; left: 25%; width: 120px; height: 120px; background: rgba(255,255,255,0.08); border-radius: 50%; animation: float 9s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 10%; left: 40%; width: 60px; height: 60px; background: rgba(255,255,255,0.12); border-radius: 50%; animation: float 5s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 50%; right: 8%; width: 90px; height: 90px; background: rgba(255,255,255,0.09); border-radius: 50%; animation: float 10s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 15%; right: 35%; width: 70px; height: 70px; background: rgba(255,255,255,0.11); border-radius: 50%; animation: float 6.5s ease-in-out infinite;"),
+                      tags$div(style = "position: absolute; top: 80%; left: 5%; width: 110px; height: 110px; background: rgba(255,255,255,0.07); border-radius: 50%; animation: float 8.5s ease-in-out infinite;"),
+                      
+                      tags$div(style = "position: relative; z-index: 1;",
+                               h1(tags$span("Welcome to ", tags$em("Healthcare Helper"), tags$sup("™")),
+                                  style = "font-size: 58px; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"),
+                               p("Empowering you with data-driven insights for better healthcare decisions",
+                                 style = "font-size: 22px; max-width: 700px; margin: 0 auto 30px; opacity: 0.95;"),
+                               tags$div(style = "display: inline-block; background: rgba(255,255,255,0.2); padding: 15px 30px; border-radius: 50px; backdrop-filter: blur(10px);",
+                                        tags$span(style = "font-size: 18px; font-weight: 500;", "🏥 Explore • 📊 Analyze • 💡 Decide"))
+                      )
+             ),
+             
+             # Features Grid
+             tags$div(style = "max-width: 1200px; margin: 60px auto; padding: 0 20px;",
+                      h2("What Can You Do?", style = "text-align: center; font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 50px;"),
+                      
+                      tags$div(style = "display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;",
+                               # Feature Card 1 - Specialty Geographic Distribution
+                               tags$div(class = "feature-card",
+                                        style = "background: linear-gradient(135deg, #2C5F8D 0%, #1a3a5c 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(44,95,141,0.3); color: white;",
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🗺️"),
+                                        h3("Specialty Geographic Distribution", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
+                                        p("Discover geographic distribution of medical specialties across the United States with interactive visualizations.",
+                                          style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
+                               ),
+                               
+                               # Feature Card 2 - Specialty State Rankings
+                               tags$div(class = "feature-card",
+                                        style = "background: linear-gradient(135deg, #E76F51 0%, #c94d31 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(231,111,81,0.3); color: white;",
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "📊"),
+                                        h3("Specialty State Rankings", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
+                                        p("Compare states to find where your desired medical specialty is most prominent and accessible.",
+                                          style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
+                               ),
+                               
+                               # Feature Card 3 - Specialty Distribution Analysis
+                               tags$div(class = "feature-card",
+                                        style = "background: linear-gradient(135deg, #90E0EF 0%, #5ab9d4 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(144,224,239,0.3); color: white;",
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🥧"),
+                                        h3("Specialty Distribution Analysis", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
+                                        p("Analyze specialty distribution within each state to understand local healthcare landscapes.",
+                                          style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
+                               ),
+                               
+                               # Feature Card 4 - Health Risk Calculator
+                               tags$div(class = "feature-card",
+                                        style = "background: linear-gradient(135deg, #F77F00 0%, #c96600 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(247,127,0,0.3); color: white;",
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "❤️"),
+                                        h3("Health Risk Calculator", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
+                                        p("Get personalized health risk assessments based on your metrics and compare with similar patient profiles.",
+                                          style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
+                               )
+                      )
+             ),
+             
+             # Stats Section
+             tags$div(style = "background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 60px 20px; margin-top: 60px;",
+                      tags$div(style = "max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;",
+                               tags$div(
+                                 h3("50+", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
+                                 p("States & Territories", style = "color: rgba(255,255,255,0.9); font-size: 18px;")
+                               ),
+                               tags$div(
+                                 h3("10,000+", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
+                                 p("Patient Records", style = "color: rgba(255,255,255,0.9); font-size: 18px;")
+                               ),
+                               tags$div(
+                                 h3("15+", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
+                                 p("Medical Specialties", style = "color: rgba(255,255,255,0.9); font-size: 18px;")
+                               )
+                      )
+             ),
+             
+             # Medical Image Section
+             tags$div(style = "text-align: center; padding: 60px 20px; background: white;",
+                      tags$img(src = "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
+                               alt = "Medical stethoscope",
+                               style = "width: 100%; max-width: 700px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);")
+             ),
+             
+             # Call to Action
+             tags$div(style = "text-align: center; padding: 80px 20px; background: #f8f9fa;",
+                      h2("Ready to Get Started?", style = "font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 20px;"),
+                      p("Click the tabs at the top to explore different features and insights!",
+                        style = "font-size: 24px; color: #667eea; font-weight: 500; margin-bottom: 40px;"),
+                      
+                      # Fun animation arrow pointing up
+                      tags$div(style = "margin-top: 30px;",
+                               tags$div(style = "font-size: 60px; animation: bounce 2s infinite;", "☝️"),
+                               tags$style(HTML("
+                                 @keyframes bounce {
+                                   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                                   40% { transform: translateY(-20px); }
+                                   60% { transform: translateY(-10px); }
+                                 }
+                               "))
+                      )
+             ),
+             
+             # CSS animations
+             tags$style(HTML("
+               @keyframes float {
+                 0%, 100% { transform: translateY(0px); }
+                 50% { transform: translateY(-20px); }
+               }
+             "))
            )
   ),
   
@@ -108,7 +219,7 @@ ui <- navbarPage(
   
   ################################
   # 1 CHLOROPLETH:
-  tabPanel("Specialty Map by State",
+  tabPanel("Specialty Geographic Distribution",
            sidebarLayout(
              sidebarPanel(
                selectInput("specialty_select",
@@ -131,7 +242,7 @@ ui <- navbarPage(
   
   ######################################
   # 2 THIS IS HISTOGRAM:
-  tabPanel("Find most prominent specialties by state",
+  tabPanel("Specialty State Rankings",
            
            sidebarLayout(
              sidebarPanel(  
@@ -162,7 +273,7 @@ ui <- navbarPage(
   
   ######################################
   # 3 THIS IS THE PIE CHART PER STATE!
-  tabPanel("State by state pie chart specialty analysis",
+  tabPanel("Specialty Distribution Analysis",
            sidebarLayout(
              sidebarPanel(
                selectInput("state_select",
