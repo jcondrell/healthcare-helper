@@ -167,7 +167,7 @@ ui <- navbarPage(
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
-                               # Feature Card 4 - Treatment Pathways (NEW!)
+                               # Feature Card 4 - Treatment Pathways
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(16,185,129,0.3); color: white;",
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "💊"),
@@ -242,25 +242,34 @@ ui <- navbarPage(
   ),
   
   
-  
   ################################
   # 1 CHLOROPLETH:
   tabPanel("Specialty Geographic Distribution",
-           sidebarLayout(
-             sidebarPanel(
-               selectInput("specialty_select",
-                           "Select Specialty:",
-                           choices = unique(specialtyByState$specialty),
-                           selected = unique(specialtyByState$specialty)[1])
-             ),
-             mainPanel(
-               h3("Geographic Distribution of Selected Specialty"),
-               p("This map shows what percentage of each state's physicians work in your selected specialty. 
+           # Standardized hero header
+           tags$div(style = "background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); padding: 50px 20px; text-align: center; color: white;",
+                    h1("Specialty Geographic Distribution", 
+                       style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
+                    p("Explore where medical specialties are concentrated across the United States",
+                      style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
+           ),
+           
+           tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
+                    sidebarLayout(
+                      sidebarPanel(
+                        selectInput("specialty_select",
+                                    "Select Specialty:",
+                                    choices = unique(specialtyByState$specialty),
+                                    selected = unique(specialtyByState$specialty)[1])
+                      ),
+                      mainPanel(
+                        p("This map shows what percentage of each state's physicians work in your selected specialty. 
           Colors range from purple (lower percentage) to yellow (higher percentage), making it easy 
           to identify where this specialty is most concentrated. Note: The 'Other Specialties' category is excluded from 
-          the total physician count for this calculation."),
-               leafletOutput("chloropleth_map", height = 600)
-             )
+          the total physician count for this calculation.",
+                          style = "margin-bottom: 20px;"),
+                        leafletOutput("chloropleth_map", height = 600)
+                      )
+                    )
            )
   ),
   ###################################
@@ -269,29 +278,37 @@ ui <- navbarPage(
   ######################################
   # 2 THIS IS HISTOGRAM:
   tabPanel("Specialty State Rankings",
+           # Standardized hero header
+           tags$div(style = "background: linear-gradient(135deg, #ff6f61 0%, #e85d4f 100%); padding: 50px 20px; text-align: center; color: white;",
+                    h1("Specialty State Rankings", 
+                       style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
+                    p("Compare states to find where medical specialties are most prominent",
+                      style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
+           ),
            
-           sidebarLayout(
-             sidebarPanel(  
-               selectInput(inputId = "n_breaks",
-                           label = "Pick desired specialty:",
-                           choices = unique(specialtyByStateWithOther$specialty),
-                           selected = c("Pick your desired specialty")
-               ),
-               checkboxInput(inputId = "show_percent",
-                             label = strong("Show percentage of state's total physicians"),
-                             value = FALSE
-               )
-             ),
-             
-             mainPanel(
-               h3("Understanding Specialty Distribution"),
-               p("This chart can help you find the top 10 states with the most physicians in your selected specialty. 
+           tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
+                    sidebarLayout(
+                      sidebarPanel(  
+                        selectInput(inputId = "n_breaks",
+                                    label = "Pick desired specialty:",
+                                    choices = unique(specialtyByStateWithOther$specialty),
+                                    selected = c("Pick your desired specialty")
+                        ),
+                        checkboxInput(inputId = "show_percent",
+                                      label = strong("Show percentage of state's total physicians"),
+                                      value = FALSE
+                        )
+                      ),
+                      
+                      mainPanel(
+                        p("This chart can help you find the top 10 states with the most physicians in your selected specialty. 
           States highlighted in red indicate where this specialty is the #1 most common specialty 
-          in that state, while blue indicates that there is still a high quantity of physicians in that specialty, but it may not be #1 in that state."),
-               plotOutput("main_plot")
-             )
+          in that state, while blue indicates that there is still a high quantity of physicians in that specialty, but it may not be #1 in that state.",
+                          style = "margin-bottom: 20px;"),
+                        plotOutput("main_plot")
+                      )
+                    )
            )
-           
   ),
   ##################################
   
@@ -299,31 +316,41 @@ ui <- navbarPage(
   ######################################
   # 3 THIS IS THE PIE CHART PER STATE!
   tabPanel("Specialty Distribution Analysis",
-           sidebarLayout(
-             sidebarPanel(
-               selectInput("state_select",
-                           "Select a State:",
-                           choices = unique(specialtyByState$Location),
-                           selected = unique(specialtyByState$Location)[1]),
-               h4(textOutput("total_physicians"))
-             ),
-             
-             mainPanel(
-               h3("Understanding specialty percentages within selected states:"),
-               p("This pie chart allows you to select a state and see which specialties are most dominant in that state.
-            Of note, 'Other Specialties' was included in this metrics to show hollistic distribution."),
-               
-               plotOutput("pie_chart")
-             )
+           # Standardized hero header
+           tags$div(style = "background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%); padding: 50px 20px; text-align: center; color: white;",
+                    h1("Specialty Distribution Analysis", 
+                       style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
+                    p("Analyze how medical specialties are distributed within each state",
+                      style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
+           ),
+           
+           tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
+                    sidebarLayout(
+                      sidebarPanel(
+                        selectInput("state_select",
+                                    "Select a State:",
+                                    choices = unique(specialtyByState$Location),
+                                    selected = unique(specialtyByState$Location)[1]),
+                        h4(textOutput("total_physicians"))
+                      ),
+                      
+                      mainPanel(
+                        p("This pie chart allows you to select a state and see which specialties are most dominant in that state.
+            Of note, 'Other Specialties' was included in this metrics to show hollistic distribution.",
+                          style = "margin-bottom: 20px;"),
+                        
+                        plotOutput("pie_chart")
+                      )
+                    )
            )
   ),
   ##############################################
   
   
   ######################################
-  # 4 TREATMENT PATHWAYS - NEW TAB!
+  # 4 TREATMENT PATHWAYS:
   tabPanel("Treatment Pathways",
-           # Hero section with relaxed vibe
+           # Hero section
            tags$div(style = "background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 50px 20px; text-align: center; color: white;",
                     h1("Treatment Pathways Explorer", 
                        style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
@@ -331,7 +358,7 @@ ui <- navbarPage(
                       style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
            ),
            
-           # Main content with tabs-within-tab for organization
+           # Main content
            tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
                     
                     # Filter section
@@ -366,22 +393,25 @@ ui <- navbarPage(
                       
                       # Main visualizations
                       column(9,
-                             # Top row - Overview cards
+                             # Single large visualization for treatment breakdown
                              fluidRow(
-                               column(6,
+                               column(12,
                                       tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;",
                                                h4("📊 Treatment Breakdown", style = "color: #374151; margin-bottom: 15px;"),
-                                               plotOutput("treatment_pie", height = 280)
+                                               plotOutput("treatment_pie", height = 450)
                                       )
-                               ),
-                               column(6,
-                                      tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;",
+                               )
+                             ),
+                             
+                             # Stats section below
+                             fluidRow(
+                               column(12,
+                                      tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);",
                                                h4("📈 Quick Stats", style = "color: #374151; margin-bottom: 15px;"),
                                                htmlOutput("treatment_stats")
                                       )
                                )
-                             ),
-                          
+                             )
                       )
                     )
            )
@@ -392,110 +422,109 @@ ui <- navbarPage(
   ######################################
   # 5 HEALTH RISK CALCULATOR:
   tabPanel("Health Risk Calculator",
-           fluidRow(
-             column(12,
-                    div(style = "text-align: center; padding: 30px 20px;",
-                        h1("Personal Health Risk Assessment", 
-                           style = "font-size: 42px; font-weight: bold; color: #d32f2f; margin-bottom: 20px;"),
-                        p("Enter your health metrics below to see how you compare to our patient dataset and assess potential health risks.",
-                          style = "font-size: 18px; color: #555; margin-bottom: 40px;")
-                    )
-             )
+           # Standardized hero header
+           tags$div(style = "background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); padding: 50px 20px; text-align: center; color: white;",
+                    h1("Health Risk Calculator", 
+                       style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
+                    p("Get personalized health assessments and compare with patient data",
+                      style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
            ),
            
-           sidebarLayout(
-             sidebarPanel(
-               h3("Enter Your Health Metrics:", style = "color: #d32f2f;"),
-               
-               numericInput("input_age",
-                            "Age:",
-                            value = 45,
-                            min = 18,
-                            max = 100,
-                            step = 1),
-               
-               selectInput("input_gender",
-                           "Gender:",
-                           choices = c("Male", "Female"),
-                           selected = "Male"),
-               
-               numericInput("input_bp",
-                            "Blood Pressure (systolic):",
-                            value = 120,
-                            min = 80,
-                            max = 200,
-                            step = 1),
-               
-               numericInput("input_hr",
-                            "Heart Rate (bpm):",
-                            value = 70,
-                            min = 40,
-                            max = 150,
-                            step = 1),
-               
-               numericInput("input_chol",
-                            "Cholesterol Level (mg/dL):",
-                            value = 200,
-                            min = 100,
-                            max = 400,
-                            step = 1),
-               
-               numericInput("input_bmi",
-                            "BMI:",
-                            value = 25,
-                            min = 15,
-                            max = 50,
-                            step = 0.1),
-               
-               actionButton("calculate_risk",
-                            "Calculate My Risk Profile",
-                            style = "background-color: #d32f2f; color: white; font-weight: bold; width: 100%; padding: 12px; font-size: 16px;")
-             ),
-             
-             mainPanel(
-               h3("Your Health Risk Profile:", style = "color: #d32f2f; margin-bottom: 20px;"),
-               
-               uiOutput("risk_level_box"),
-               
-               fluidRow(
-                 column(6,
-                        div(class = "metric-box",
-                            h4(strong("Your Percentile Rankings:")),
-                            htmlOutput("percentile_rankings")
+           tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
+                    sidebarLayout(
+                      sidebarPanel(
+                        h3("Enter Your Health Metrics:", style = "color: #d32f2f;"),
+                        
+                        numericInput("input_age",
+                                     "Age:",
+                                     value = 45,
+                                     min = 18,
+                                     max = 100,
+                                     step = 1),
+                        
+                        selectInput("input_gender",
+                                    "Gender:",
+                                    choices = c("Male", "Female"),
+                                    selected = "Male"),
+                        
+                        numericInput("input_bp",
+                                     "Blood Pressure (systolic):",
+                                     value = 120,
+                                     min = 80,
+                                     max = 200,
+                                     step = 1),
+                        
+                        numericInput("input_hr",
+                                     "Heart Rate (bpm):",
+                                     value = 70,
+                                     min = 40,
+                                     max = 150,
+                                     step = 1),
+                        
+                        numericInput("input_chol",
+                                     "Cholesterol Level (mg/dL):",
+                                     value = 200,
+                                     min = 100,
+                                     max = 400,
+                                     step = 1),
+                        
+                        numericInput("input_bmi",
+                                     "BMI:",
+                                     value = 25,
+                                     min = 15,
+                                     max = 50,
+                                     step = 0.1),
+                        
+                        actionButton("calculate_risk",
+                                     "Calculate My Risk Profile",
+                                     style = "background-color: #d32f2f; color: white; font-weight: bold; width: 100%; padding: 12px; font-size: 16px;")
+                      ),
+                      
+                      mainPanel(
+                        h3("Your Health Risk Profile:", style = "color: #d32f2f; margin-bottom: 20px;"),
+                        
+                        uiOutput("risk_level_box"),
+                        
+                        fluidRow(
+                          column(6,
+                                 div(class = "metric-box",
+                                     h4(strong("Your Percentile Rankings:")),
+                                     htmlOutput("percentile_rankings")
+                                 )
+                          ),
+                          column(6,
+                                 div(class = "metric-box",
+                                     h4(strong("Similar Patient Profile:")),
+                                     htmlOutput("similar_patients_info")
+                                 )
+                          )
+                        ),
+                        
+                        br(),
+                        
+                        fluidRow(
+                          column(12,
+                                 h4(strong("If Seeking Medical Help: Common Diagnoses for Individuals with Similar Demographics"), style = "margin-top: 20px;"),
+                                 p("This chart shows the most frequent diagnoses among patients in our dataset with similar characteristics to yours (within ±10 years age, same gender, and ±5 BMI points). The percentages indicate what proportion of these similar patients received each diagnosis.",
+                                   style = "color: #666; font-size: 14px; margin-bottom: 10px; line-height: 1.5;"),
+                                 p(strong("Important Note:"), " This dataset only includes individuals who sought medical care at healthcare facilities. Many healthy individuals with similar profiles who did not require medical attention are not represented in this data. These percentages should not be interpreted as your likelihood of developing these conditions.",
+                                   style = "color: #d32f2f; font-size: 13px; margin-bottom: 15px; line-height: 1.5; background-color: #fff3e0; padding: 10px; border-radius: 5px; border-left: 4px solid #ff9800;"),
+                                 plotOutput("diagnosis_distribution", height = 300)
+                          )
+                        ),
+                        
+                        br(),
+                        
+                        fluidRow(
+                          column(12,
+                                 h4(strong("How You Compare to Dataset Averages:"), style = "margin-top: 20px;"),
+                                 p("This comparison shows your health metrics (in red) side-by-side with the average values from our entire patient dataset (in blue). This helps you see where your values are higher or lower than typical patients in our database.",
+                                   style = "color: #666; font-size: 14px; margin-bottom: 15px; line-height: 1.5;"),
+                                 plotOutput("comparison_chart", height = 350)
+                          )
                         )
-                 ),
-                 column(6,
-                        div(class = "metric-box",
-                            h4(strong("Similar Patient Profile:")),
-                            htmlOutput("similar_patients_info")
-                        )
-                 )
-               ),
-               
-               br(),
-               
-               fluidRow(
-                 column(12,
-                        h4(strong("If Seeking Medical Help: Common Diagnoses for Individuals with Similar Demographics"), style = "margin-top: 20px;"),
-                        p("This chart shows the most frequent diagnoses among patients in our dataset with similar characteristics to yours (within ±10 years age, same gender, and ±5 BMI points). The percentages indicate what proportion of these similar patients received each diagnosis.",
-                          style = "color: #666; font-size: 14px; margin-bottom: 10px; line-height: 1.5;"),
-                        p(strong("Important Note:"), " This dataset only includes individuals who sought medical care at healthcare facilities. Many healthy individuals with similar profiles who did not require medical attention are not represented in this data. These percentages should not be interpreted as your likelihood of developing these conditions.",
-                          style = "color: #d32f2f; font-size: 13px; margin-bottom: 15px; line-height: 1.5; background-color: #fff3e0; padding: 10px; border-radius: 5px; border-left: 4px solid #ff9800;"),
-                        plotOutput("diagnosis_distribution", height = 300)
-                 )
-               ),
-               
-               br(),
-               
-               fluidRow(
-                 column(12,
-                        h4(strong("How You Compare to Dataset Averages:"), style = "margin-top: 20px;"),
-                        p("This comparison shows your health metrics (in red) side-by-side with the average values from our entire patient dataset (in blue). This helps you see where your values are higher or lower than typical patients in our database.",
-                          style = "color: #666; font-size: 14px; margin-bottom: 15px; line-height: 1.5;"),
-                        plotOutput("comparison_chart", height = 350)
-                 )
-               )
-             )
+                      )
+                    )
            )
   )
   ##############################################
