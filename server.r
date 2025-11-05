@@ -644,4 +644,5 @@ function(input, output) {
      
      
      ##############################################
-} # THIS COVERS THE WHOLE CODE! (connected to function(input,output) around line 16)
+     
+} # THIS COVERS THE WHOLE CODE!
