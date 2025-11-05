@@ -254,20 +254,33 @@ ui <- navbarPage(
            ),
            
            tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
-                    sidebarLayout(
-                      sidebarPanel(
-                        selectInput("specialty_select",
-                                    "Select Specialty:",
-                                    choices = unique(specialtyByState$specialty),
-                                    selected = unique(specialtyByState$specialty)[1])
+                    fluidRow(
+                      column(3,
+                             tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);",
+                                      h4("🔍 Select Specialty:", style = "color: #1e88e5; margin-bottom: 20px;"),
+                                      selectInput("specialty_select",
+                                                  NULL,
+                                                  choices = unique(specialtyByState$specialty),
+                                                  selected = unique(specialtyByState$specialty)[1]),
+                                      
+                                      hr(style = "border-color: #e5e7eb;"),
+                                      
+                                      tags$div(style = "background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #1e88e5;",
+                                               h5("💡 About This Map:", style = "color: #1565c0; margin-top: 0;"),
+                                               p(style = "font-size: 12px; color: #374151; margin: 5px 0; line-height: 1.6;",
+                                                 "Colors show the percentage of each state's physicians in the selected specialty.", br(), br(),
+                                                 "🟣 Purple = Lower %", br(),
+                                                 "🟡 Yellow = Higher %", br(), br(),
+                                                 "Note: 'Other Specialties' excluded from calculations.")
+                                      )
+                             )
                       ),
-                      mainPanel(
-                        p("This map shows what percentage of each state's physicians work in your selected specialty. 
-          Colors range from purple (lower percentage) to yellow (higher percentage), making it easy 
-          to identify where this specialty is most concentrated. Note: The 'Other Specialties' category is excluded from 
-          the total physician count for this calculation.",
-                          style = "margin-bottom: 20px;"),
-                        leafletOutput("chloropleth_map", height = 600)
+                      
+                      column(9,
+                             tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);",
+                                      h4("🗺️ Interactive Geographic Map", style = "color: #374151; margin-bottom: 15px;"),
+                                      leafletOutput("chloropleth_map", height = 600)
+                             )
                       )
                     )
            )
