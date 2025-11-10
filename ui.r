@@ -311,7 +311,7 @@ ui <- navbarPage(
                       
                       column(9,
                              tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);",
-                                      h4("🗺️ Interactive Geographic Map", style = "color: #374151; margin-bottom: 15px;"),
+                                      h4("Interactive Geographic Map", style = "color: #374151; margin-bottom: 15px;"),
                                       leafletOutput("chloropleth_map", height = 600)
                              )
                       )
