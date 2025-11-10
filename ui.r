@@ -247,7 +247,7 @@ ui <- navbarPage(
              
              # Call to Action
              tags$div(style = "text-align: center; padding: 80px 20px; background: #f8f9fa;",
-                      h2("Ready to Get Started?", style = "font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 20px;"),
+                      h2("Ready to get started?", style = "font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 20px;"),
                       p("Click the tabs at the top to explore different features and insights!",
                         style = "font-size: 24px; color: #667eea; font-weight: 500; margin-bottom: 40px;"),
                       

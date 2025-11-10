@@ -505,7 +505,7 @@ output$treatment_pie <- renderPlot({
          if (nrow(plot_data) == 0) {
            ggplot() +
              annotate("text", x = 0.5, y = 0.5, 
-                      label = "No data matches your filters 🤷", 
+                      label = "No data matches your filters", 
                       size = 5, color = "#6b7280") +
              theme_void()
          } else {
@@ -614,7 +614,7 @@ output$treatment_demographics <- renderPlot({
      if (nrow(plot_data) == 0) {
        ggplot() +
          annotate("text", x = 0.5, y = 0.5, 
-                  label = "No data matches your filters 🤷", 
+                  label = "No data matches your filters", 
                   size = 5, color = "#6b7280") +
          theme_void()
      } else {
