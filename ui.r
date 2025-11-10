@@ -164,7 +164,7 @@ ui <- navbarPage(
                                p("Empowering you with data-driven insights for better healthcare decisions",
                                  style = "font-size: 22px; max-width: 700px; margin: 0 auto 30px; opacity: 0.95;"),
                                tags$div(style = "display: inline-block; background: rgba(255,255,255,0.2); padding: 15px 30px; border-radius: 50px; backdrop-filter: blur(10px);",
-                                        tags$span(style = "font-size: 18px; font-weight: 500;", "🏥 Explore • 📊 Analyze • 💡 Decide"))
+                                        tags$span(style = "font-size: 18px; font-weight: 500;", "Explore • Analyze • Decide"))
                       )
              ),
              
