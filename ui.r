@@ -9,6 +9,15 @@ healthcare_dataset <- read_csv("healthcare_dataset.csv")
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
 specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE)
 
+# Clean up specialty names for better display
+specialtyByState$specialty <- gsub("\\.", " ", specialtyByState$specialty)
+specialtyByState$specialty <- gsub("Oncology  Cancer ", "Oncology (Cancer)", specialtyByState$specialty)
+specialtyByState$specialty <- gsub("Endocrinology  Diabetes  and Metabolism", "Endocrinology, Diabetes, and Metabolism", specialtyByState$specialty)
+
+specialtyByStateWithOther$specialty <- gsub("\\.", " ", specialtyByStateWithOther$specialty)
+specialtyByStateWithOther$specialty <- gsub("Oncology  Cancer ", "Oncology (Cancer)", specialtyByStateWithOther$specialty)
+specialtyByStateWithOther$specialty <- gsub("Endocrinology  Diabetes  and Metabolism", "Endocrinology, Diabetes, and Metabolism", specialtyByStateWithOther$specialty)
+
 # BEGINNING OF MAIN SHINY CODES:
 ui <- navbarPage(
   title = tags$span(style = "font-weight: bold; color: red;", tags$em("Healthcare Helper"), tags$sup("™")),
@@ -103,12 +112,36 @@ ui <- navbarPage(
              /* Hover effect for feature cards */
              .feature-card {
                transition: transform 0.3s ease, box-shadow 0.3s ease;
+               cursor: pointer;
              }
              .feature-card:hover {
                transform: translateY(-5px);
              }
           "))
   ),
+  tags$script(HTML("
+    $(document).ready(function() {
+      $('.feature-card').click(function() {
+        var cardTitle = $(this).find('h3').text();
+        var tabName;
+        
+        if (cardTitle.includes('Specialty Geographic Distribution')) {
+          tabName = 'Specialty Geographic Distribution';
+        } else if (cardTitle.includes('Specialty State Rankings')) {
+          tabName = 'Specialty State Rankings';
+        } else if (cardTitle.includes('Specialty Distribution Analysis')) {
+          tabName = 'Specialty Distribution Analysis';
+        } else if (cardTitle.includes('Treatment Pathways')) {
+          tabName = 'Treatment Pathways';
+        } else if (cardTitle.includes('Health Risk Calculator')) {
+          tabName = 'Health Risk Calculator';
+        }
+        
+        $('a[data-value=\"' + tabName + '\"]').tab('show');
+      });
+    });
+  ")),
+  
   
   # HOME TAB
   tabPanel("Home",

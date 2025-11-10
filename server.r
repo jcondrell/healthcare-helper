@@ -10,9 +10,22 @@ library(htmltools) # for chloropleth
 
 
 # Importing all csv datasets: 
-healthcare_dataset <- read_csv("healthcare_dataset.csv") # you have to copy these lines and then run in the console to be able to see them in the environment!
-specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE) # for the histogram (2)
-specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE) # for pie chart (3) (includes all specialties and "other" column in state_facts)
+healthcare_dataset <- read_csv("healthcare_dataset.csv")
+specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
+specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE)
+
+# Clean up specialty names for better display
+specialtyByState$specialty <- gsub("\\.", " ", specialtyByState$specialty)
+specialtyByState$specialty <- gsub("Emergency Medicine", "Emergency Medicine", specialtyByState$specialty)
+specialtyByState$specialty <- gsub("Oncology  Cancer ", "Oncology (Cancer)", specialtyByState$specialty)
+specialtyByState$specialty <- gsub("Endocrinology  Diabetes  and Metabolism", "Endocrinology, Diabetes, and Metabolism", specialtyByState$specialty)
+specialtyByState$specialty <- gsub("All Other Specialties", "All Other Specialties", specialtyByState$specialty)
+
+specialtyByStateWithOther$specialty <- gsub("\\.", " ", specialtyByStateWithOther$specialty)
+specialtyByStateWithOther$specialty <- gsub("Emergency Medicine", "Emergency Medicine", specialtyByStateWithOther$specialty)
+specialtyByStateWithOther$specialty <- gsub("Oncology  Cancer ", "Oncology (Cancer)", specialtyByStateWithOther$specialty)
+specialtyByStateWithOther$specialty <- gsub("Endocrinology  Diabetes  and Metabolism", "Endocrinology, Diabetes, and Metabolism", specialtyByStateWithOther$specialty)
+specialtyByStateWithOther$specialty <- gsub("All Other Specialties", "All Other Specialties", specialtyByStateWithOther$specialty)
 
 
 # BEGINNING OF MAIN CODE:
