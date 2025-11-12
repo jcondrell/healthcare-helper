@@ -655,7 +655,7 @@ output$treatment_demographics <- renderPlot({
 ##############################################
      
 
-
+############################################
 # HEALTH METRICS BY DIAGNOSIS
 # Map display names to actual column names
 get_metric_column <- function(display_name) {
@@ -710,23 +710,29 @@ output$metric_summary_cards <- renderUI({
   tags$div(style = "display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;",
            # Highest card
            tags$div(style = paste0("background: linear-gradient(135deg, ", highest_color, " 0%, ", highest_color, "dd 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;"),
-                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "HIGHEST"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "HIGHEST AVERAGE"),
                     tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(highest$avg, 1)),
-                    tags$div(style = "font-size: 16px; font-weight: 500;", highest$Diagnosis)
+                    tags$div(style = "font-size: 16px; font-weight: 500;", highest$Diagnosis),
+                    tags$div(style = "font-size: 12px; opacity: 0.85; margin-top: 8px;", 
+                             paste("This diagnosis has the highest mean", input$metric_select))
            ),
            
            # Overall average card
            tags$div(style = "background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;",
                     tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "OVERALL AVERAGE"),
                     tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(overall_avg, 1)),
-                    tags$div(style = "font-size: 16px; font-weight: 500;", paste("All", nrow(data), "Patients"))
+                    tags$div(style = "font-size: 16px; font-weight: 500;", paste("All", nrow(data), "Patients")),
+                    tags$div(style = "font-size: 12px; opacity: 0.85; margin-top: 8px;", 
+                             "Average across all selected diagnoses")
            ),
            
            # Lowest card
            tags$div(style = paste0("background: linear-gradient(135deg, ", lowest_color, " 0%, ", lowest_color, "dd 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;"),
-                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "LOWEST"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "LOWEST AVERAGE"),
                     tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(lowest$avg, 1)),
-                    tags$div(style = "font-size: 16px; font-weight: 500;", lowest$Diagnosis)
+                    tags$div(style = "font-size: 16px; font-weight: 500;", lowest$Diagnosis),
+                    tags$div(style = "font-size: 12px; opacity: 0.85; margin-top: 8px;", 
+                             paste("This diagnosis has the lowest mean", input$metric_select))
            )
   )
 })
@@ -805,6 +811,7 @@ output$diagnosis_stats_table <- renderTable({
   
   stats_table
 }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'l', width = '100%', align = 'c')
+
 
 ##############################################
 
