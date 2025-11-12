@@ -499,9 +499,9 @@ tabPanel("Health Metrics by Diagnosis",
                                     tags$div(style = "background: #f5f3ff; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #8b5cf6;",
                                              h5("How to Read:", style = "color: #6d28d9; margin-top: 0;"),
                                              p(style = "font-size: 12px; color: #374151; margin: 5px 0; line-height: 1.6;",
-                                               "📦 ", strong("Box shows:"), " Middle 50% of patients", br(), br(),
-                                               "━ ", strong("Line in box:"), " Median (middle value)", br(), br(),
-                                               "⬤ ", strong("Dots:"), " Individual patient values", br(), br(),
+                                               strong("Box indicates:"), " Middle 50% of patients", br(), br(),
+                                               strong("Line in box:"), " Median (middle value)", br(), br(),
+                                               strong("Dots:"), " Individual patient values", br(), br(),
                                                "Compare box positions to see how diagnoses differ!")
                                     ),
                                     
