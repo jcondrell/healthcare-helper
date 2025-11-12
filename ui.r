@@ -147,7 +147,7 @@ ui <- navbarPage(
   tabPanel("Home",
            tags$div(
              # Hero Section
-             tags$div(style = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 20px; text-align: center; color: white; position: relative; overflow: hidden;",
+             tags$div(style = "background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); padding: 80px 20px; text-align: center; color: white; position: relative; overflow: hidden;",
                       # Animated background bubbles
                       tags$div(style = "position: absolute; top: 20%; left: 10%; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 6s ease-in-out infinite;"),
                       tags$div(style = "position: absolute; top: 60%; right: 15%; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 8s ease-in-out infinite;"),
@@ -170,7 +170,7 @@ ui <- navbarPage(
              
              # Features Grid
              tags$div(style = "max-width: 1200px; margin: 60px auto; padding: 0 20px;",
-                      h2("What Can You Do?", style = "text-align: center; font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 50px;"),
+                      h2("What can you do?", style = "text-align: center; font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 50px;"),
                       
                       tags$div(style = "display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;",
                                # Feature Card 1 - Specialty Geographic Distribution
@@ -194,7 +194,7 @@ ui <- navbarPage(
                                # Feature Card 3 - Specialty Distribution Analysis
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(236,64,122,0.3); color: white;",
-                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🥧"),
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🎯"),
                                         h3("Specialty Distribution Analysis", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Analyze specialty distribution within each state to understand local healthcare landscapes.",
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
@@ -212,7 +212,7 @@ ui <- navbarPage(
                                # Feature Card 5 - Health Risk Calculator
                                tags$div(class = "feature-card",
                                         style = "background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(211,47,47,0.3); color: white;",
-                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "❤️"),
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🤍"),
                                         h3("Health Risk Calculator", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Get personalized health risk assessments based on your metrics and compare with similar patient profiles.",
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
@@ -221,7 +221,7 @@ ui <- navbarPage(
              ),
              
              # Stats Section
-             tags$div(style = "background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 60px 20px; margin-top: 60px;",
+             tags$div(style = "background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); padding: 60px 20px; margin-top: 60px;",
                       tags$div(style = "max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;",
                                tags$div(
                                  h3("51", style = "font-size: 48px; font-weight: bold; color: white; margin-bottom: 10px;"),
@@ -458,6 +458,102 @@ tabPanel("Specialty Distribution Analysis",
 
 
 ######################################
+# 6 HEALTH METRICS BY DIAGNOSIS TAB
+tabPanel("Health Metrics by Diagnosis",
+         # Hero section
+         tags$div(style = "background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); padding: 50px 20px; text-align: center; color: white;",
+                  h1("Health Metrics by Diagnosis", 
+                     style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
+                  p("Compare how health indicators differ across medical conditions",
+                    style = "font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto;")
+         ),
+         
+         # Main content
+         tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
+                  
+                  # Filter section
+                  fluidRow(
+                    column(3,
+                           tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);",
+                                    h4("Select Metric:", style = "color: #8b5cf6; margin-bottom: 20px;"),
+                                    
+                                    selectInput("metric_select",
+                                                "Health Metric to Analyze:",
+                                                choices = c("Age", "Blood Pressure", "Heart Rate", 
+                                                            "Cholesterol", "BMI"),
+                                                selected = "BMI"),
+                                    
+                                    hr(style = "border-color: #e5e7eb;"),
+                                    
+                                    h5("Filter Diagnoses:", style = "color: #8b5cf6; margin-bottom: 15px;"),
+                                    
+                                    checkboxGroupInput("diagnosis_filter",
+                                                       "Show:",
+                                                       choices = c("Healthy", "Hypertension", "Hyperlipidemia", 
+                                                                   "Diabetes", "Coronary Artery Disease"),
+                                                       selected = c("Healthy", "Hypertension", "Hyperlipidemia", 
+                                                                    "Diabetes", "Coronary Artery Disease")),
+                                    
+                                    hr(style = "border-color: #e5e7eb;"),
+                                    
+                                    tags$div(style = "background: #f5f3ff; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #8b5cf6;",
+                                             h5("How to Read:", style = "color: #6d28d9; margin-top: 0;"),
+                                             p(style = "font-size: 12px; color: #374151; margin: 5px 0; line-height: 1.6;",
+                                               "📦 ", strong("Box shows:"), " Middle 50% of patients", br(), br(),
+                                               "━ ", strong("Line in box:"), " Median (middle value)", br(), br(),
+                                               "⬤ ", strong("Dots:"), " Individual patient values", br(), br(),
+                                               "Compare box positions to see how diagnoses differ!")
+                                    ),
+                                    
+                                    hr(style = "border-color: #e5e7eb; margin-top: 20px;"),
+                                    
+                                    tags$div(style = "background: #dbeafe; padding: 15px; border-radius: 8px; border-left: 4px solid #3b82f6;",
+                                             h5("What This Shows:", style = "color: #1e40af; margin-top: 0;"),
+                                             p(style = "font-size: 12px; color: #374151; margin: 5px 0; line-height: 1.6;",
+                                               "See typical metric values for each diagnosis.", br(), br(),
+                                               "Higher boxes = higher values for that condition.", br(), br(),
+                                               "Use this to understand health profiles!")
+                                    )
+                           )
+                    ),
+                    
+                    # Main visualization
+                    column(9,
+                           # Summary stats cards
+                           fluidRow(
+                             column(12,
+                                    uiOutput("metric_summary_cards")
+                             )
+                           ),
+                           
+                           # Box plot
+                           fluidRow(
+                             column(12,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;",
+                                             h4("Distribution Comparison", style = "color: #374151; margin-bottom: 15px;"),
+                                             p("Each box shows the range and distribution of values for that diagnosis",
+                                               style = "color: #6b7280; font-size: 14px; margin-bottom: 15px;"),
+                                             plotOutput("diagnosis_boxplot", height = 500)
+                                    )
+                             )
+                           ),
+                           
+                           # Statistics table
+                           fluidRow(
+                             column(12,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;",
+                                             h4("Detailed Statistics", style = "color: #374151; margin-bottom: 15px;"),
+                                             tableOutput("diagnosis_stats_table")
+                                    )
+                             )
+                           )
+                    )
+                  )
+         )
+),
+######################################
+
+######################################
 # 4 TREATMENT PATHWAYS:
 tabPanel("Treatment Pathways",
          # Hero section
@@ -638,6 +734,5 @@ tabPanel("Health Risk Calculator",
          )
 )
 ##############################################
-
 
 ) # connects to navbarPage at top! must engulf WHOLE THING!

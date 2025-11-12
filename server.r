@@ -277,7 +277,7 @@ risk_data <- eventReactive(input$calculate_risk, {
        "Potential High Risk"
      } else if (risk_score <= 2) {
        "Low"
-     } else if (risk_score == 4) {
+     } else if (risk_score <= 4) {
        "Medium"
      } else {
        "High"
@@ -654,4 +654,158 @@ output$treatment_demographics <- renderPlot({
 
 ##############################################
      
-} # THIS COVERS THE WHOLE CODE!
+
+
+# HEALTH METRICS BY DIAGNOSIS
+# Map display names to actual column names
+get_metric_column <- function(display_name) {
+  col_map <- c(
+    "Age" = "Age",
+    "Blood Pressure" = "Blood_Pressure",
+    "Heart Rate" = "Heart_Rate",
+    "Cholesterol" = "Cholesterol_Level",
+    "BMI" = "BMI"
+  )
+  return(col_map[display_name])
+}
+
+# Reactive data filtered by diagnosis selection
+diagnosis_filtered_data <- reactive({
+  healthcare_dataset %>%
+    filter(Diagnosis %in% input$diagnosis_filter)
+})
+
+# Summary cards showing key stats
+output$metric_summary_cards <- renderUI({
+  
+  metric_col <- get_metric_column(input$metric_select)
+  data <- diagnosis_filtered_data()
+  
+  # Calculate stats for each diagnosis
+  stats <- data %>%
+    group_by(Diagnosis) %>%
+    summarise(
+      avg = mean(.data[[metric_col]], na.rm = TRUE),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(avg))
+  
+  # Find highest and lowest
+  highest <- stats %>% slice(1)
+  lowest <- stats %>% slice(n())
+  overall_avg <- mean(data[[metric_col]], na.rm = TRUE)
+  
+  # Define diagnosis colors
+  diagnosis_colors <- c(
+    "Healthy" = "#10b981",
+    "Hypertension" = "#f59e0b",
+    "Hyperlipidemia" = "#8b5cf6",
+    "Diabetes" = "#ef4444",
+    "Coronary Artery Disease" = "#3b82f6"
+  )
+  
+  highest_color <- diagnosis_colors[highest$Diagnosis]
+  lowest_color <- diagnosis_colors[lowest$Diagnosis]
+  
+  tags$div(style = "display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;",
+           # Highest card
+           tags$div(style = paste0("background: linear-gradient(135deg, ", highest_color, " 0%, ", highest_color, "dd 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "HIGHEST"),
+                    tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(highest$avg, 1)),
+                    tags$div(style = "font-size: 16px; font-weight: 500;", highest$Diagnosis)
+           ),
+           
+           # Overall average card
+           tags$div(style = "background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;",
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "OVERALL AVERAGE"),
+                    tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(overall_avg, 1)),
+                    tags$div(style = "font-size: 16px; font-weight: 500;", paste("All", nrow(data), "Patients"))
+           ),
+           
+           # Lowest card
+           tags$div(style = paste0("background: linear-gradient(135deg, ", lowest_color, " 0%, ", lowest_color, "dd 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "LOWEST"),
+                    tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(lowest$avg, 1)),
+                    tags$div(style = "font-size: 16px; font-weight: 500;", lowest$Diagnosis)
+           )
+  )
+})
+
+# Box plot showing distributions
+output$diagnosis_boxplot <- renderPlot({
+  
+  metric_col <- get_metric_column(input$metric_select)
+  data <- diagnosis_filtered_data()
+  
+  if (nrow(data) == 0) {
+    ggplot() +
+      annotate("text", x = 0.5, y = 0.5, 
+               label = "No data selected.\nPlease check at least one diagnosis.", 
+               size = 6, color = "#6b7280") +
+      theme_void()
+  } else {
+    # Define diagnosis colors
+    diagnosis_colors <- c(
+      "Healthy" = "#10b981",
+      "Hypertension" = "#f59e0b",
+      "Hyperlipidemia" = "#8b5cf6",
+      "Diabetes" = "#ef4444",
+      "Coronary Artery Disease" = "#3b82f6"
+    )
+    
+    # Create box plot with individual points
+    ggplot(data, aes(x = Diagnosis, y = .data[[metric_col]], fill = Diagnosis)) +
+      geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+      geom_jitter(width = 0.2, alpha = 0.3, size = 2) +
+      scale_fill_manual(values = diagnosis_colors) +
+      labs(
+        x = "",
+        y = input$metric_select,
+        title = paste(input$metric_select, "Distribution by Diagnosis")
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, size = 18, face = "bold", color = "#374151", margin = margin(b = 20)),
+        axis.title.y = element_text(size = 14, face = "bold", margin = margin(r = 10)),
+        axis.text.x = element_text(size = 11, angle = 20, hjust = 1),
+        axis.text.y = element_text(size = 12),
+        legend.position = "none",
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.margin = margin(20, 20, 20, 20)
+      )
+  }
+})
+
+# Statistics table
+output$diagnosis_stats_table <- renderTable({
+  
+  metric_col <- get_metric_column(input$metric_select)
+  data <- diagnosis_filtered_data()
+  
+  if (nrow(data) == 0) {
+    return(data.frame(Message = "No data selected"))
+  }
+  
+  # Calculate detailed statistics
+  stats_table <- data %>%
+    group_by(Diagnosis) %>%
+    summarise(
+      Count = n(),
+      Minimum = round(min(.data[[metric_col]], na.rm = TRUE), 1),
+      `25th Percentile` = round(quantile(.data[[metric_col]], 0.25, na.rm = TRUE), 1),
+      Median = round(median(.data[[metric_col]], na.rm = TRUE), 1),
+      Mean = round(mean(.data[[metric_col]], na.rm = TRUE), 1),
+      `75th Percentile` = round(quantile(.data[[metric_col]], 0.75, na.rm = TRUE), 1),
+      Maximum = round(max(.data[[metric_col]], na.rm = TRUE), 1),
+      `Std Dev` = round(sd(.data[[metric_col]], na.rm = TRUE), 1),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(Mean))
+  
+  stats_table
+}, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'l', width = '100%', align = 'c')
+
+##############################################
+
+}
