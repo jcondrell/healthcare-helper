@@ -697,11 +697,11 @@ output$metric_summary_cards <- renderUI({
   
   # Define diagnosis colors
   diagnosis_colors <- c(
-    "Healthy" = "#10b981",
-    "Hypertension" = "#f59e0b",
-    "Hyperlipidemia" = "#8b5cf6",
-    "Diabetes" = "#ef4444",
-    "Coronary Artery Disease" = "#3b82f6"
+    "Healthy" = "#2ECC71",
+    "Hypertension" = "#F39C12",
+    "Hyperlipidemia" = "#E67E22",
+    "Diabetes" = "#E74C3C",
+    "Coronary Artery Disease" = "#C0392B"
   )
   
   highest_color <- diagnosis_colors[highest$Diagnosis]
@@ -752,11 +752,11 @@ output$diagnosis_boxplot <- renderPlot({
   } else {
     # Define diagnosis colors
     diagnosis_colors <- c(
-      "Healthy" = "#10b981",
-      "Hypertension" = "#f59e0b",
-      "Hyperlipidemia" = "#8b5cf6",
-      "Diabetes" = "#ef4444",
-      "Coronary Artery Disease" = "#3b82f6"
+      "Healthy" = "#2ECC71",
+      "Hypertension" = "#F39C12",
+      "Hyperlipidemia" = "#E67E22",
+      "Diabetes" = "#E74C3C",
+      "Coronary Artery Disease" = "#C0392B"
     )
     
     # Create box plot with individual points
