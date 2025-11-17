@@ -262,13 +262,13 @@ ui <- navbarPage(
                                style = "width: 100%; max-width: 700px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);")
              ),
              
-             # Call to Action
+             # Next steps
              tags$div(style = "text-align: center; padding: 80px 20px; background: #f8f9fa;",
                       h2("Ready to get started?", style = "font-size: 42px; font-weight: bold; color: #2c3e50; margin-bottom: 20px;"),
                       p("Click the tabs at the top to explore different features and insights!",
                         style = "font-size: 24px; color: #667eea; font-weight: 500; margin-bottom: 40px;"),
                       
-                      # Fun animation arrow pointing up
+                      # Animation arrow pointing up
                       tags$div(style = "margin-top: 30px;",
                                tags$div(style = "font-size: 60px; animation: bounce 2s infinite;", "☝️"),
                                tags$style(HTML("
