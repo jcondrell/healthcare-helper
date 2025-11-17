@@ -432,7 +432,7 @@ risk_data <- eventReactive(input$calculate_risk, {
          geom_text(aes(label = paste0(percentage, "%")), vjust = -0.5, fontface = "bold") +
          labs(x = "Diagnosis",
               y = "Number of Patients") +
-         scale_fill_manual(values = diagnosis_colors) +  # Add this line
+         scale_fill_manual(values = diagnosis_colors) + 
          scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
          theme_minimal() +
          theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
