@@ -14,7 +14,7 @@ healthcare_dataset <- read_csv("healthcare_dataset.csv")
 specialtyByState <- read.csv("specialtyByState.csv", stringsAsFactors = FALSE)
 specialtyByStateWithOther <- read.csv("specialtyByState_WithOther.csv", stringsAsFactors = FALSE)
 
-# Clean up specialty names for better display
+# Clean up specialty names for better display (within the tabs specifically, like under the dropdowns and graph/chart displays)
 specialtyByState$specialty <- gsub("\\.", " ", specialtyByState$specialty)
 specialtyByState$specialty <- gsub("Emergency Medicine", "Emergency Medicine", specialtyByState$specialty)
 specialtyByState$specialty <- gsub("Oncology  Cancer ", "Oncology (Cancer)", specialtyByState$specialty)
