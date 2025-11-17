@@ -477,7 +477,7 @@ tabPanel("Specialty Distribution Analysis",
 ######################################
 # 6 HEALTH METRICS BY DIAGNOSIS TAB
 tabPanel("Health Metrics by Diagnosis",
-         # Hero section
+         # Standardized hero header
          tags$div(style = "background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); padding: 50px 20px; text-align: center; color: white;",
                   h1("Health Metrics by Diagnosis", 
                      style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
