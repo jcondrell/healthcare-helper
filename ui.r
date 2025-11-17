@@ -22,11 +22,12 @@ specialtyByStateWithOther$specialty <- gsub("Endocrinology  Diabetes  and Metabo
 ui <- navbarPage(
   title = tags$span(style = "font-weight: bold; color: red;", tags$em("Healthcare Helper"), tags$sup("™")),
   
-  tags$head(
-    tags$style(HTML("
-            body {
-              font-family: 'Times New Roman', Times, serif;
-             }
+  header = tagList(
+    tags$head(
+      tags$style(HTML("
+              body {
+                font-family: 'Times New Roman', Times, serif;
+               }
              .risk-box {
                padding: 20px;
                margin: 15px 0;
@@ -123,9 +124,10 @@ ui <- navbarPage(
                transform: translateY(-5px);
              }
           "))
+
   ),
   tags$script(HTML("
-    $(document).ready(function() {
+      $(document).ready(function() {
       $('.feature-card').click(function() {
         var cardTitle = $(this).find('h3').text();
         var tabName;
@@ -146,6 +148,7 @@ ui <- navbarPage(
       });
     });
   ")),
+  ),
   
   
   # HOME TAB
