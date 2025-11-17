@@ -90,6 +90,11 @@ ui <- navbarPage(
                background-color: #ec407a !important;
                color: white !important;
              }
+             /* Health Metrics by Diagnosis - Purple */
+             .navbar-default .navbar-nav > li > a[data-value='Health Metrics by Diagnosis'] {
+               background-color: #8b5cf6 !important;
+               color: white !important;
+             }
              /* Treatment Pathways - Emerald Green */
              .navbar-default .navbar-nav > li > a[data-value='Treatment Pathways'] {
                background-color: #10b981 !important;
@@ -197,6 +202,15 @@ ui <- navbarPage(
                                         tags$div(style = "font-size: 48px; margin-bottom: 15px;", "🎯"),
                                         h3("Specialty Distribution Analysis", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
                                         p("Analyze specialty distribution within each state to understand local healthcare landscapes.",
+                                          style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
+                               ),
+                               
+                               # Feature Card 5 - Health Metrics by Diagnosis
+                               tags$div(class = "feature-card",
+                                        style = "background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(139,92,246,0.3); color: white;",
+                                        tags$div(style = "font-size: 48px; margin-bottom: 15px;", "📈"),
+                                        h3("Health Metrics by Diagnosis", style = "color: white; font-size: 24px; margin-bottom: 15px; font-weight: bold;"),
+                                        p("Compare health indicators across different medical conditions and understand typical metric ranges.",
                                           style = "color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 16px;")
                                ),
                                
