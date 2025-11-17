@@ -573,7 +573,7 @@ tabPanel("Health Metrics by Diagnosis",
 ######################################
 # 4 TREATMENT PATHWAYS:
 tabPanel("Treatment Pathways",
-         # Hero section
+         # Standardized hero header
          tags$div(style = "background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 50px 20px; text-align: center; color: white;",
                   h1("Treatment Pathways Explorer", 
                      style = "font-size: 38px; font-weight: bold; margin-bottom: 15px;"),
