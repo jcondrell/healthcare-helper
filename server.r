@@ -137,7 +137,7 @@ function(input, output) {
                                y = physicianNumbers, 
                                fill = is_top)) +
       geom_col() +
-      scale_fill_manual(values = c("Top Specialty" = "firebrick1", "Not Top" = "dodgerblue")) +
+      scale_fill_manual(values = c("Top Specialty" = "firebrick3", "Not Top" = "dodgerblue")) +
       labs(title = paste("Top 10 States for", input$n_breaks),
            x = "State",
            y = "Number of Physicians",
