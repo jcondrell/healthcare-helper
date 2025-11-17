@@ -83,7 +83,7 @@ function(input, output) {
         fillOpacity = 0.7,
         highlightOptions = highlightOptions(
           weight = 5,
-          color = "#666",
+          color = "#667",
           dashArray = "",
           fillOpacity = 0.7,
           bringToFront = TRUE),
