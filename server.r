@@ -710,7 +710,7 @@ output$metric_summary_cards <- renderUI({
   tags$div(style = "display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;",
            # Highest card
            tags$div(style = paste0("background: linear-gradient(135deg, ", highest_color, " 0%, ", highest_color, "dd 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;"),
-                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "HIGHEST AVERAGE"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "DIAGNOSIS WITH THE HIGHEST AVERAGE"),
                     tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(highest$avg, 1)),
                     tags$div(style = "font-size: 16px; font-weight: 500;", highest$Diagnosis),
                     tags$div(style = "font-size: 12px; opacity: 0.85; margin-top: 8px;", 
@@ -719,7 +719,7 @@ output$metric_summary_cards <- renderUI({
            
            # Overall average card
            tags$div(style = "background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;",
-                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "OVERALL AVERAGE"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "OVERALL AVERAGE ACROSS ALL DIAGNOSES"),
                     tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(overall_avg, 1)),
                     tags$div(style = "font-size: 16px; font-weight: 500;", paste("All", nrow(data), "Patients")),
                     tags$div(style = "font-size: 12px; opacity: 0.85; margin-top: 8px;", 
@@ -728,7 +728,7 @@ output$metric_summary_cards <- renderUI({
            
            # Lowest card
            tags$div(style = paste0("background: linear-gradient(135deg, ", lowest_color, " 0%, ", lowest_color, "dd 100%); padding: 20px; border-radius: 10px; color: white; text-align: center;"),
-                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "LOWEST AVERAGE"),
+                    tags$div(style = "font-size: 14px; opacity: 0.9; margin-bottom: 5px;", "DIAGNOSIS WITH THE LOWEST AVERAGE"),
                     tags$div(style = "font-size: 28px; font-weight: bold; margin: 10px 0;", round(lowest$avg, 1)),
                     tags$div(style = "font-size: 16px; font-weight: 500;", lowest$Diagnosis),
                     tags$div(style = "font-size: 12px; opacity: 0.85; margin-top: 8px;", 
