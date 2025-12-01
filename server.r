@@ -783,35 +783,6 @@ output$diagnosis_boxplot <- renderPlot({
   }
 })
 
-# Statistics table
-output$diagnosis_stats_table <- renderTable({
-  
-  metric_col <- get_metric_column(input$metric_select)
-  data <- diagnosis_filtered_data()
-  
-  if (nrow(data) == 0) {
-    return(data.frame(Message = "No data selected"))
-  }
-  
-  # Calculate detailed statistics
-  stats_table <- data %>%
-    group_by(Diagnosis) %>%
-    summarise(
-      Count = n(),
-      Minimum = round(min(.data[[metric_col]], na.rm = TRUE), 1),
-      `25th Percentile` = round(quantile(.data[[metric_col]], 0.25, na.rm = TRUE), 1),
-      Median = round(median(.data[[metric_col]], na.rm = TRUE), 1),
-      Mean = round(mean(.data[[metric_col]], na.rm = TRUE), 1),
-      `75th Percentile` = round(quantile(.data[[metric_col]], 0.75, na.rm = TRUE), 1),
-      Maximum = round(max(.data[[metric_col]], na.rm = TRUE), 1),
-      `Std Dev` = round(sd(.data[[metric_col]], na.rm = TRUE), 1),
-      .groups = 'drop'
-    ) %>%
-    arrange(desc(Mean))
-  
-  stats_table
-}, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'l', width = '100%', align = 'c')
-
 
 ##############################################
 

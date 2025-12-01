@@ -553,16 +553,6 @@ tabPanel("Health Metrics by Diagnosis",
                                              plotOutput("diagnosis_boxplot", height = 500)
                                     )
                              )
-                           ),
-                           
-                           # Statistics table
-                           fluidRow(
-                             column(12,
-                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;",
-                                             h4("Detailed Statistics", style = "color: #374151; margin-bottom: 15px;"),
-                                             tableOutput("diagnosis_stats_table")
-                                    )
-                             )
                            )
                     )
                   )
