@@ -644,98 +644,125 @@ tabPanel("Health Risk Calculator",
          ),
          
          tags$div(style = "max-width: 1400px; margin: 40px auto; padding: 0 20px;",
-                  sidebarLayout(
-                    sidebarPanel(
-                      h3("Enter Your Health Metrics:", style = "color: #d32f2f;"),
-                      
-                      numericInput("input_age",
-                                   "Age:",
-                                   value = 45,
-                                   min = 18,
-                                   max = 100,
-                                   step = 1),
-                      
-                      selectInput("input_gender",
-                                  "Gender:",
-                                  choices = c("Male", "Female"),
-                                  selected = "Male"),
-                      
-                      numericInput("input_bp",
-                                   "Blood Pressure (systolic):",
-                                   value = 120,
-                                   min = 80,
-                                   max = 200,
-                                   step = 1),
-                      
-                      numericInput("input_hr",
-                                   "Heart Rate (bpm):",
-                                   value = 70,
-                                   min = 40,
-                                   max = 150,
-                                   step = 1),
-                      
-                      numericInput("input_chol",
-                                   "Cholesterol Level (mg/dL):",
-                                   value = 200,
-                                   min = 100,
-                                   max = 400,
-                                   step = 1),
-                      
-                      numericInput("input_bmi",
-                                   "BMI:",
-                                   value = 25,
-                                   min = 15,
-                                   max = 50,
-                                   step = 0.1),
-                      
-                      actionButton("calculate_risk",
-                                   "Calculate My Risk Profile",
-                                   style = "background-color: #d32f2f; color: white; font-weight: bold; width: 100%; padding: 12px; font-size: 16px;")
+                  fluidRow(
+                    # LEFT SIDEBAR - Input Panel
+                    column(3,
+                           tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 100%;",
+                                    h4("Enter Your Health Metrics:", style = "color: #d32f2f; margin-bottom: 20px;"),
+                                    
+                                    numericInput("input_age",
+                                                 "Age:",
+                                                 value = 45,
+                                                 min = 18,
+                                                 max = 100,
+                                                 step = 1),
+                                    
+                                    selectInput("input_gender",
+                                                "Gender:",
+                                                choices = c("Male", "Female"),
+                                                selected = "Male"),
+                                    
+                                    numericInput("input_bp",
+                                                 "Blood Pressure (systolic):",
+                                                 value = 120,
+                                                 min = 80,
+                                                 max = 200,
+                                                 step = 1),
+                                    
+                                    numericInput("input_hr",
+                                                 "Heart Rate (bpm):",
+                                                 value = 70,
+                                                 min = 40,
+                                                 max = 150,
+                                                 step = 1),
+                                    
+                                    numericInput("input_chol",
+                                                 "Cholesterol Level (mg/dL):",
+                                                 value = 200,
+                                                 min = 100,
+                                                 max = 400,
+                                                 step = 1),
+                                    
+                                    numericInput("input_bmi",
+                                                 "BMI:",
+                                                 value = 25,
+                                                 min = 15,
+                                                 max = 50,
+                                                 step = 0.1),
+                                    
+                                    hr(style = "border-color: #e5e7eb; margin: 25px 0;"),
+                                    
+                                    actionButton("calculate_risk",
+                                                 "Calculate My Risk Profile",
+                                                 style = "background-color: #d32f2f; color: white; font-weight: bold; width: 100%; padding: 12px; font-size: 16px; border: none; border-radius: 6px; cursor: pointer;"),
+                                    
+                                    hr(style = "border-color: #e5e7eb; margin: 25px 0;"),
+                                    
+                                    tags$div(style = "background: #ffebee; padding: 15px; border-radius: 8px; border-left: 4px solid #d32f2f;",
+                                             h5("About This Tool:", style = "color: #b71c1c; margin-top: 0;"),
+                                             p(style = "font-size: 12px; color: #374151; margin: 5px 0; line-height: 1.6;",
+                                               "• Compare your metrics to our patient database", br(),
+                                               "• See your percentile rankings", br(),
+                                               "• Understand your risk profile", br(), br(),
+                                               tags$strong("Note:"), " This is for informational purposes only. Always consult a healthcare provider.")
+                                    )
+                           )
                     ),
                     
-                    mainPanel(
-                      h3("Your Health Risk Profile:", style = "color: #d32f2f; margin-bottom: 20px;"),
-                      
-                      uiOutput("risk_level_box"),
-                      
-                      fluidRow(
-                        column(6,
-                               div(class = "metric-box",
-                                   h4(strong("Your Percentile Rankings:")),
-                                   htmlOutput("percentile_rankings")
-                               )
-                        ),
-                        column(6,
-                               div(class = "metric-box",
-                                   h4(strong("Similar Patient Profile:")),
-                                   htmlOutput("similar_patients_info")
-                               )
-                        )
-                      ),
-                      
-                      br(),
-                      
-                      fluidRow(
-                        column(12,
-                               h4(strong("If Seeking Medical Help: Common Diagnoses for Individuals with Similar Demographics"), style = "margin-top: 20px;"),
-                               p("This chart shows the most frequent diagnoses among patients in our dataset with similar characteristics to yours (within ±10 years age, same gender, and ±5 BMI points). The percentages indicate what proportion of these similar patients received each diagnosis.",
-                                 style = "color: #666; font-size: 14px; margin-bottom: 10px; line-height: 1.5;"),
-                               p(strong("Important Note:"), " This dataset only includes individuals who sought medical care at healthcare facilities. Many healthy individuals with similar profiles who did not require medical attention are not represented in this data. These percentages should not be interpreted as your likelihood of developing these conditions.",
-                                 style = "color: #d32f2f; font-size: 13px; margin-bottom: 15px; line-height: 1.5; background-color: #fff3e0; padding: 10px; border-radius: 5px; border-left: 4px solid #ff9800;"),
-                               plotOutput("diagnosis_distribution", height = 300)
-                        )
-                      ),
-                      
-                      br(),
-                      
-                      fluidRow(
-                        column(12,
-                               h4(strong("How You Compare to Dataset Averages:"), style = "margin-top: 20px;"),
-                               p("This comparison shows your health metrics (in red) side-by-side with the average values from our entire patient dataset (in blue). This helps you see where your values are higher or lower than typical patients in our database.",
-                                 style = "color: #666; font-size: 14px; margin-bottom: 15px; line-height: 1.5;"),
-                               plotOutput("comparison_chart", height = 350)
-                        )
-                      )
+                    # RIGHT PANEL - Results
+                    column(9,
+                           # Risk Level Box
+                           tags$div(style = "margin-bottom: 20px;",
+                                    uiOutput("risk_level_box")
+                           ),
+                           
+                           # Percentile Rankings and Similar Patients
+                           fluidRow(
+                             column(6,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 100%;",
+                                             h4("Your Percentile Rankings", style = "color: #374151; margin-bottom: 15px;"),
+                                             p("See how your metrics compare to all patients in our database",
+                                               style = "color: #6b7280; font-size: 14px; margin-bottom: 15px;"),
+                                             htmlOutput("percentile_rankings")
+                                    )
+                             ),
+                             column(6,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 100%;",
+                                             h4("Similar Patient Profile", style = "color: #374151; margin-bottom: 15px;"),
+                                             p("Patients with similar age, gender, and BMI",
+                                               style = "color: #6b7280; font-size: 14px; margin-bottom: 15px;"),
+                                             htmlOutput("similar_patients_info")
+                                    )
+                             )
+                           ),
+                           
+                           # Diagnosis Distribution Chart
+                           fluidRow(
+                             column(12,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;",
+                                             h4("Common Diagnoses for Similar Patients", style = "color: #374151; margin-bottom: 15px;"),
+                                             p("This chart shows the most frequent diagnoses among patients in our dataset with similar characteristics to yours (within ±10 years age, same gender, and ±5 BMI points). The percentages indicate what proportion of these similar patients received each diagnosis.",
+                                               style = "color: #6b7280; font-size: 14px; margin-bottom: 10px; line-height: 1.5;"),
+                                             tags$div(style = "background: #fff3e0; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800; margin-bottom: 20px;",
+                                                      p(style = "margin: 0; font-size: 13px; color: #e65100; line-height: 1.5;",
+                                                        tags$strong("Important Note:"), " This dataset only includes individuals who sought medical care at healthcare facilities. Many healthy individuals with similar profiles who did not require medical attention are not represented in this data. These percentages should not be interpreted as your likelihood of developing these conditions.")
+                                             ),
+                                             plotOutput("diagnosis_distribution", height = 300)
+                                    )
+                             )
+                           ),
+                           
+                           # Comparison Chart
+                           fluidRow(
+                             column(12,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;",
+                                             h4("How You Compare to Dataset Averages", style = "color: #374151; margin-bottom: 15px;"),
+                                             p("This comparison shows your health metrics (in red) side-by-side with the average values from our entire patient dataset (in blue). This helps you see where your values are higher or lower than typical patients in our database.",
+                                               style = "color: #6b7280; font-size: 14px; margin-bottom: 15px; line-height: 1.5;"),
+                                             plotOutput("comparison_chart", height = 350)
+                                    )
+                             )
+                           )
                     )
                   )
          )
