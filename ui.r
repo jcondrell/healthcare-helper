@@ -124,9 +124,9 @@ ui <- navbarPage(
                transform: translateY(-5px);
              }
           "))
-
-  ),
-  tags$script(HTML("
+      
+    ),
+    tags$script(HTML("
       $(document).ready(function() {
       $('.feature-card').click(function() {
         var cardTitle = $(this).find('h3').text();
@@ -336,8 +336,8 @@ tabPanel("Specialty Geographic Distribution",
          )
 ),
 ###################################
-  
-  
+
+
 ######################################
 # 2 THIS IS HISTOGRAM:
 tabPanel("Specialty State Rankings",
@@ -551,6 +551,16 @@ tabPanel("Health Metrics by Diagnosis",
                                              p("Each box shows the range and distribution of values for that diagnosis",
                                                style = "color: #6b7280; font-size: 14px; margin-bottom: 15px;"),
                                              plotOutput("diagnosis_boxplot", height = 500)
+                                    )
+                             )
+                           ),
+                           
+                           # Statistics table
+                           fluidRow(
+                             column(12,
+                                    tags$div(style = "background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;",
+                                             h4("Detailed Statistics", style = "color: #374151; margin-bottom: 15px;"),
+                                             tableOutput("diagnosis_stats_table")
                                     )
                              )
                            )
@@ -768,5 +778,5 @@ tabPanel("Health Risk Calculator",
          )
 )
 ##############################################
-
+  
 ) # connects to navbarPage at top! must engulf WHOLE THING!
