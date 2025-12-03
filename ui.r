@@ -2,7 +2,7 @@
 library(shiny)
 library(tidyverse)
 library(ggplot2)
-library(leaflet)
+library(leaflet)                        
 
 # Importing all csv datasets: 
 healthcare_dataset <- read_csv("healthcare_dataset.csv")
